@@ -8,15 +8,20 @@ window.addEventListener('DOMContentLoaded', () => {
     const paragrafoPrimeiraEscolha = document.querySelector('.js-primeira-escolha');
     const paragrafoSegundaEscolha = document.querySelector('.js-segunda-escolha');
     const dialogoGeral = document.querySelector('.js-info-geral-personagem');
-    console.log(dialogoGeral)
+    const personagem = document.querySelector('.js-personagem')
     function primeiroCapitulo() {
         dialogoEscolha.textContent = 'Olá caro aventureiro(a) poderia informar o seu nome ?'
         btnAvancar.textContent = 'Informar Nome'
         btnAvancar.addEventListener('click', () => {
+            dialogoEscolha.textContent = ''
             btnAvancar.classList.add('none')
+            btnAvancar.classList.add('none')
+            personagem.classList.remove('none')
+            personagem.classList.add('animacao-subindo')
             nomeUsuario = inputInfo.value;
+            inputInfo.classList.add('none')
             paragrafoPrimeiraEscolha.classList.remove('none')
-            paragrafoPrimeiraEscolha.textContent = `Olá ${nomeUsuario}! Aqui quem fala é o mestre do elfos`
+            paragrafoPrimeiraEscolha.textContent = `Olá ${nomeUsuario}! Aqui quem fala é o mestre dos magos`
             paragrafoPrimeiraEscolha.classList.add('animacao-aparecer')
             setTimeout(() => {
                 paragrafoSegundaEscolha.classList.remove('none')
@@ -37,7 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
         if (!(nomeUsuario !== undefined)) {
             alert('Por favor, é necessario informar um nome!')
         } else {
-            dialogoEscolha.innerHTML = 'Como informei anteriormente, sou o mestre dos elfos, meu nome é <span class="galadran-nome">Galadran</span> guardião da antiga sabedoria e condutor de tua jornada épica'
+            dialogoEscolha.innerHTML = 'Como informei anteriormente, sou o mestre dos magos, meu nome é <span class="Althor-nome">Althor</span> guardião da antiga sabedoria e condutor de tua jornada épica'
             inputInfo.classList.add('none')
             btnComecarJornada.remove()
             paragrafoSegundaEscolha.textContent = ''

@@ -1,9 +1,47 @@
-body {
-    font-size:62.5%;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.galadran-nome {
-    color: #008000;
+html, body {
+    overflow: hidden
+}
+
+body {
+    font-size:62.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    background: #006400 url(../image/fundo-selva.png)no-repeat top center;
+    background-size: cover;
+}
+
+main {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+img.personagem {
+    width: 100%;
+    max-width: 600px;
+    min-width: 200px;
+    margin-top: 15px;
+} 
+
+section.secao-dialogo {
+padding: 15px 0 70px 10px;
+border: 2px solid #0c3a96;
+position: fixed;
+background: #fff;
+z-index: 1000;
+width: 100%;
+bottom: 0;
+}
+
+.Althor-nome {
+    color: #3366cc;
     font-size: 2.3rem;
 }
 
@@ -14,4 +52,18 @@ h1 {
 
 p {
     font-size: 1.6rem;
+}
+
+.animacao-subindo {
+    animation: animacao-subindo 1s forwards ease;
+}
+
+@keyframes animacao-subindo {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
