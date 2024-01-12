@@ -1,20 +1,24 @@
 window.addEventListener('DOMContentLoaded', () => {
-    let nomeUsuario;
+    let nomeUsuario = '';
     const dialogoEscolha = document.querySelector('h1.dialogo-escolha')
     const btnComecarJornada = document.querySelector('.js-comecar-jornada-btn');
-    const secaoDialogo = document.querySelector('.secao-dialogo');
     const inputInfo = document.querySelector("input.js-input-info");
     const btnAvancar = document.querySelector('button.js-btn-avancar');
     const paragrafoPrimeiraEscolha = document.querySelector('.js-primeira-escolha');
     const paragrafoSegundaEscolha = document.querySelector('.js-segunda-escolha');
-    const dialogoGeral = document.querySelector('.js-info-geral-personagem');
     const personagem = document.querySelector('.js-personagem')
-    function primeiroCapitulo() {
-        dialogoEscolha.textContent = 'Olá caro aventureiro(a) poderia informar o seu nome ?'
-        btnAvancar.textContent = 'Informar Nome'
-        btnAvancar.addEventListener('click', () => {
+    const body = document.body;
+    // let audio = new Audio('../audio/som-floresta.mp3')
+    // const audioPlay = setInterval(() => {
+    //     audio.play()
+    // }, 0.000000000001)
+    function dialogoInicial() {       
+        // verifica se o nome tem mais de 2 caracter e se não tem numero
+        if (inputInfo.value.length <= 2 || !(isNaN(inputInfo.value + 1))) {
+            alert('Por favor, é necessario informar um nome valido')
+        }
+        else {
             dialogoEscolha.textContent = ''
-            btnAvancar.classList.add('none')
             btnAvancar.classList.add('none')
             personagem.classList.remove('none')
             personagem.classList.add('animacao-subindo')
@@ -33,20 +37,52 @@ window.addEventListener('DOMContentLoaded', () => {
                     btnComecarJornada.classList.add('animacao-aparecer')
                 }, 4000)
             }, 2400)
-        })
+        }
     }
 
-    primeiroCapitulo()
+    function introducao() {
+        dialogoEscolha.textContent = 'Olá caro aventureiro(a) poderia informar o seu nome ?'
+        btnAvancar.textContent = 'Informar Nome'
+        btnAvancar.addEventListener('click', dialogoInicial)
+    }
+    introducao()
 
+    // abaixo está a segunda parte do capitulo
+    function historiaMalvagor() {
+        // audio.pause()
+        // clearInterval(audioPlay)
+        let audio = new Audio('../audio/som-terror.mp3')
+        audio.play()
+        btnAvancar.classList.add('none')
+        body.style.backgroundColor = '#000000'
+        body.style.backgroundImage = 'none'
+        personagem.setAttribute('src', 'image/rosto-malfagor.webp')
+        personagem.classList.remove('animacao-subindo')
+        personagem.classList.add('animacao-aparecer')
+        personagem.style.marginTop = '30px'
+    }
     btnComecarJornada.addEventListener('click', () => {
         if (!(nomeUsuario !== undefined)) {
             alert('Por favor, é necessario informar um nome!')
         } else {
+            btnAvancar.removeEventListener('click', dialogoInicial)
             dialogoEscolha.innerHTML = 'Como informei anteriormente, sou o mestre dos magos, meu nome é <span class="Althor-nome">Althor</span> guardião da antiga sabedoria e condutor de tua jornada épica'
             inputInfo.classList.add('none')
             btnComecarJornada.remove()
             paragrafoSegundaEscolha.textContent = ''
             paragrafoPrimeiraEscolha.textContent = ''
+            setTimeout(() => {
+                paragrafoPrimeiraEscolha.textContent = 'Nobre viajante, nossa terra era feliz, onde seres místicos brincavam e confraternizavam pelos campos'
+                setTimeout(() => {
+                    paragrafoSegundaEscolha.innerHTML = 'Contudo, a alegria foi interrompida pela chegada de um mal ancestral, conhecido como <span class="nome-vilao">Malvagor</span>'
+                    setTimeout(() => {
+                        btnAvancar.classList.remove('none')
+                        btnAvancar.textContent = 'Ver historia de Malvagor'
+                        btnAvancar.addEventListener('click', historiaMalvagor)
+                    })
+                }, 1000)
+            }, 1000)
+
         }
     })
 

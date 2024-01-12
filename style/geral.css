@@ -10,15 +10,11 @@ html, body {
 
 body {
     font-size:62.5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    background: #006400 url(../image/fundo-selva.png)no-repeat top center;
+    background: #006400 url(../image/fundo-floresta.webp)no-repeat top center;
     background-size: cover;
 }
 
 main {
-    position: relative;
     display: flex;
     justify-content: center;
 }
@@ -38,6 +34,8 @@ background: #fff;
 z-index: 1000;
 width: 100%;
 bottom: 0;
+max-height: 300px;
+overflow-y: scroll;
 }
 
 .Althor-nome {
@@ -66,4 +64,14 @@ p {
     100% {
         transform: translateY(0);
     }
+}
+
+.nome-vilao {
+    color: #FF0000;
+    font-size: 2.3rem;
+}
+
+
+@media scre {
+    
 }
