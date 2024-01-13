@@ -4,6 +4,41 @@
     box-sizing: border-box;
 }
 
+button, input {
+    padding: 10px;
+    margin-top: 30px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+}
+
+p {
+    margin: 10px auto 20px auto;
+}
+
+button {
+    border: none;
+    margin-left: 5px;
+    transition: 0.4s;
+    background-color: #006400;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #006400;
+    color: #fff;
+}
+
+button.comecar-jornada-btn, button.btn-avancar {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+}
+
+input {
+    border: 1px solid black;
+}
+
 html, body {
     overflow: hidden
 }
@@ -12,6 +47,7 @@ body {
     font-size:62.5%;
     background: #006400 url(../image/fundo-floresta.webp)no-repeat top center;
     background-size: cover;
+    height: 100vh;
 }
 
 main {
@@ -45,11 +81,12 @@ overflow-y: scroll;
 
 h1 {
     font-weight: 300;
-    font-size: 1.8rem;
+    font-size: 2rem;
 }
 
 p {
     font-size: 1.6rem;
+    margin: 10px auto;
 }
 
 .animacao-subindo {
@@ -69,9 +106,4 @@ p {
 .nome-vilao {
     color: #FF0000;
     font-size: 2.3rem;
-}
-
-
-@media scre {
-    
 }
