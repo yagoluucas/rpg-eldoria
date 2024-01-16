@@ -12,10 +12,6 @@ input {
     border-radius: 10px;
 }
 
-ul {
-    margin: 10px;
-}
-
 p {
     margin: 10px auto 20px auto;
 }
@@ -167,10 +163,38 @@ animation: animacao-esquerda 0.9s forwards;
     text-transform: uppercase;
 }
 
+ul {
+    margin: 10px 15px;
+    display: flex;
+    flex-direction: column;
+}
+
 li {
+    width: max-content;
     font-size: 1.4rem;
     cursor: pointer;
-    padding: 10px;
-    display: inline-block;
-    border: 1px solid red;
+    margin: 15px 5px;
+}
+
+li:last-child {
+    margin-bottom: 0;
+}
+
+li:hover {
+    animation: zoom 5s forwards linear;
+    color: #1c4875;
+}
+
+@keyframes zoom {
+    0% {
+        font-size: 1.5rem;
+    }
+
+    50% {
+        font-size: 1.6rem;
+    }
+
+    100% {
+        font-size: 1.7rem;
+    }
 }

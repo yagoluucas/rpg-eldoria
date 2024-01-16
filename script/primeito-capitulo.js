@@ -1,9 +1,8 @@
-import * as mudarConteudo from './script.js';
+import * as mudarConteudo from './mudar-conteudo.js';
+import * as geral from './script.js'
 window.addEventListener('DOMContentLoaded', () => {
-    let nomeUsuario = '';
     const dialogoEscolha = document.querySelector('h1.dialogo-escolha')
     const btnComecarJornada = document.querySelector('button.js-comecar-jornada-btn');
-    const inputInfo = document.querySelector("input.js-input-info");
     const btnAvancar = document.querySelector('button.js-btn-avancar');
     const paragrafoPrimeiraEscolha = document.querySelector('.js-primeira-escolha');
     const paragrafoSegundaEscolha = document.querySelector('.js-segunda-escolha');
@@ -13,35 +12,25 @@ window.addEventListener('DOMContentLoaded', () => {
     const rostoMalfagor = document.querySelector('.js-malfagor')
     const audio = document.querySelector('.js-som-terror')
     function dialogoInicial() {
-        if (inputInfo.value.length <= 2 || !(isNaN(inputInfo.value + 1))) {
-            alert('Por favor, é necessario informar um nome valido')
-        }
-        else {
-            dialogoEscolha.textContent = ''
-            btnAvancar.classList.add('none')
-            personagem.classList.remove('none')
-            personagem.classList.add('animacao-subindo')
-            nomeUsuario = inputInfo.value;
-            inputInfo.classList.add('none')
-            paragrafoPrimeiraEscolha.classList.remove('none')
-            paragrafoPrimeiraEscolha.textContent = `Olá ${nomeUsuario}! Aqui quem fala é o mestre dos magos`
-            paragrafoPrimeiraEscolha.classList.add('animacao-aparecer')
+        dialogoEscolha.classList.add('none')
+        btnAvancar.classList.add('none')
+        personagem.classList.remove('none')
+        personagem.classList.add('animacao-subindo')
+        paragrafoPrimeiraEscolha.classList.remove('none')
+        paragrafoPrimeiraEscolha.classList.add('animacao-aparecer')
+        paragrafoSegundaEscolha.classList.remove('none')
+            paragrafoSegundaEscolha.textContent = 'Viajante intrépido, em Eldoria, onde elfos, anões e fadas tecem o cenário mágico, uma antiga sombra ameaça o equilíbrio. Tu, escolhido, és chamado para enfrentar o mal que se ergue. Com a aliança de criaturas lendárias como centauros, grifos e ninfas, tua jornada decidirá o destino desse reino. Ergue-te, pois a esperança de Eldoria repousa em teu coração corajoso.'
+            paragrafoSegundaEscolha.classList.add('animacao-esquerda')
             setTimeout(() => {
-                paragrafoSegundaEscolha.classList.remove('none')
-                paragrafoSegundaEscolha.textContent = 'Viajante intrépido, em Eldoria, onde elfos, anões e fadas tecem o cenário mágico, uma antiga sombra ameaça o equilíbrio. Tu, escolhido, és chamado para enfrentar o mal que se ergue. Com a aliança de criaturas lendárias como centauros, grifos e ninfas, tua jornada decidirá o destino desse reino. Ergue-te, pois a esperança de Eldoria repousa em teu coração corajoso.'
-                paragrafoSegundaEscolha.classList.add('animacao-esquerda')
-                setTimeout(() => {
-                    btnComecarJornada.textContent = 'Começar Jornada'
-                    btnComecarJornada.classList.remove('none')
-                    btnComecarJornada.classList.add('animacao-aparecer')
-                }, 4000)
-            }, 2400)
-        }
+                btnComecarJornada.textContent = 'Começar Jornada'
+                btnComecarJornada.classList.remove('none')
+                btnComecarJornada.classList.add('animacao-aparecer')
+            }, 4000)
     }
 
     function introducao() {
-        dialogoEscolha.textContent = 'Olá caro aventureiro(a) poderia informar o seu nome ?'
-        btnAvancar.textContent = 'Informar Nome'
+        dialogoEscolha.textContent = 'Bem vindo ao reino de Eldoria caro guerreiro(a). Tuas escolhas moldarão o destino de Eldoria. Prepara-te para uma jornada épica'
+        btnAvancar.textContent = 'Continuar'
         btnAvancar.addEventListener('click', dialogoInicial)
     }
 
@@ -56,8 +45,6 @@ window.addEventListener('DOMContentLoaded', () => {
         body.appendChild(textoFecharCapitulo)
         textoFecharCapitulo.classList.add('final-capitulo')
         setTimeout(() => {
-                // pode trocar o link da pagina mas isso pode ser que de ruim
-                // o pathname pega o caminho do arquivo, podemos trocar esse para o novo arquivo ser carregado e colocar um evento no window para ver se contém aquele caminho, se conter ele ativa tal função
             window.location.pathname = '/html/segundo-capitulo.html'
         }, 5000)
     }
@@ -109,13 +96,13 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 9000)
     }
     btnComecarJornada.addEventListener('click', () => {
+        dialogoEscolha.classList.remove('none')
         paragrafoPrimeiraEscolha.classList.remove('animacao-aparecer')
         paragrafoSegundaEscolha.classList.remove('animacao-esquerda')
         btnAvancar.removeEventListener('click', dialogoInicial)
         dialogoEscolha.style.fontSize = '1.6rem';
-        dialogoEscolha.classList.add('animacao-esquerda')
+        dialogoEscolha.classList.add('animacao-esquerda')       
         dialogoEscolha.innerHTML = 'Como informei anteriormente, sou o mestre dos magos, meu nome é <span class="Althor-nome">Althor</span> guardião da antiga sabedoria e condutor de tua jornada épica'
-        inputInfo.classList.add('none')
         btnComecarJornada.remove()
         paragrafoSegundaEscolha.textContent = ''
         paragrafoPrimeiraEscolha.textContent = ''
