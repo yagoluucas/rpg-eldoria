@@ -1,4 +1,4 @@
-import {mudarAparenciaElemento} from './script.js';
+import * as mudarConteudo from './script.js';
 window.addEventListener('DOMContentLoaded', () => {
     let nomeUsuario = '';
     const dialogoEscolha = document.querySelector('h1.dialogo-escolha')
@@ -48,7 +48,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function terminarCapitulo() {
         main.classList.add('none')
-        mudarAparenciaElemento(body, 'none', '#000000', undefined)
+        body.classList.add('fim-capitulo')
+        mudarConteudo.mudarAparenciaElemento(body, 'none', '#000000', undefined)
+        let textoFecharCapitulo = document.createElement('h1')
+        textoFecharCapitulo.textContent = 'Fim do capitulo 1....'
+        body.appendChild(textoFecharCapitulo)
+        textoFecharCapitulo.classList.add('final-capitulo')
     }
 
     function fimHistoriaMalvagor() {
@@ -75,10 +80,10 @@ window.addEventListener('DOMContentLoaded', () => {
     function historiaMalvagor() {
         audio.play()
         btnAvancar.classList.add('none')
-        mudarAparenciaElemento(body, 'none', '#000000', undefined)
         personagem.setAttribute('src', 'image/rosto-malfagor.webp')
         personagem.classList.remove('animacao-subindo')
         personagem.classList.add('animacao-aparecer')
+        mudarConteudo.mudarAparenciaElemento(body, 'none', '#000000', undefined)
         personagem.style.marginTop = '30px'
         dialogoEscolha.classList.add('none')
         paragrafoSegundaEscolha.classList.remove('animacao-esquerda')
