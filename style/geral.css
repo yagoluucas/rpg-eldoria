@@ -4,11 +4,16 @@
     box-sizing: border-box;
 }
 
-button, input {
+button,
+input {
     padding: 10px;
     margin-top: 30px;
     font-size: 1.2rem;
     border-radius: 10px;
+}
+
+ul {
+    margin: 10px;
 }
 
 p {
@@ -29,9 +34,10 @@ button:hover {
     color: #fff;
 }
 
-button.comecar-jornada-btn, button.btn-avancar {
+button.comecar-jornada-btn,
+button.btn-avancar {
     position: absolute;
-    bottom: 20px;
+    bottom: 0.8vh;
     right: 10px;
 }
 
@@ -39,13 +45,12 @@ input {
     border: 1px solid black;
 }
 
-html, body {
+html,body {
     overflow: hidden
 }
 
 body {
-    font-size:62.5%;
-    background: #006400 url(../image/fundo-floresta.webp)no-repeat top center;
+    font-size: 62.5%;
     background-size: cover;
     height: 100vh;
 }
@@ -58,7 +63,7 @@ body.fim-capitulo {
 
 h1.final-capitulo {
     color: #ffff;
-    font-size:4rem;
+    font-size: 4rem;
 }
 
 main {
@@ -71,28 +76,33 @@ img.personagem {
     max-width: 600px;
     min-width: 200px;
     margin-top: 15px;
-} 
+}
 
 section.secao-dialogo {
-padding: 15px 0 70px 10px;
-border: 2px solid #0c3a96;
-position: fixed;
-background: #fff;
-z-index: 1000;
-width: 100%;
-bottom: 0;
-max-height: 240px;
-overflow-y: scroll;
+    background: #fff;
+    width: 100%;
+    position: relative;
+    padding: 15px 0 4.5vh 10px;
+}
+
+main div {
+    width: 100%;
+    z-index: 1000;
+    position: fixed;
+    max-height: 180px;
+    overflow-y: scroll;
+    bottom: 0;
+    border-top: 2px solid #0c3a96;
 }
 
 .Althor-nome {
     color: #3366cc;
-    font-size: 2.3rem;
+    font-size: 2rem;
 }
 
 h1 {
     font-weight: 300;
-    font-size: 2rem;
+    font-size: 1.7rem;
 }
 
 p {
@@ -117,4 +127,50 @@ p {
 .nome-vilao {
     color: #FF0000;
     font-size: 2.3rem;
+}
+
+.none {
+    display: none;
+}
+.animacao-esquerda {
+animation: animacao-esquerda 0.9s forwards;
+}
+
+@keyframes animacao-esquerda {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animacao-aparecer {
+    animation: animacao-aparecer 1s forwards;
+}
+
+@keyframes animacao-aparecer {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.bold {
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+li {
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 10px;
+    display: inline-block;
+    border: 1px solid red;
 }

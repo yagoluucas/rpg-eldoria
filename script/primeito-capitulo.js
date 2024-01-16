@@ -10,7 +10,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const personagem = document.querySelector('.js-personagem')
     const body = document.body;
     const main = document.querySelector('main')
-    const audio = new Audio('../audio/som-terror.mp3')
+    const rostoMalfagor = document.querySelector('.js-malfagor')
+    const audio = document.querySelector('.js-som-terror')
     function dialogoInicial() {
         if (inputInfo.value.length <= 2 || !(isNaN(inputInfo.value + 1))) {
             alert('Por favor, é necessario informar um nome valido')
@@ -54,14 +55,20 @@ window.addEventListener('DOMContentLoaded', () => {
         textoFecharCapitulo.textContent = 'Fim do capitulo 1....'
         body.appendChild(textoFecharCapitulo)
         textoFecharCapitulo.classList.add('final-capitulo')
+        setTimeout(() => {
+                // pode trocar o link da pagina mas isso pode ser que de ruim
+                // o pathname pega o caminho do arquivo, podemos trocar esse para o novo arquivo ser carregado e colocar um evento no window para ver se contém aquele caminho, se conter ele ativa tal função
+            window.location.pathname = '/html/segundo-capitulo.html'
+        }, 5000)
     }
 
     function fimHistoriaMalvagor() {
+        rostoMalfagor.classList.add('none')
+        personagem.classList.remove('none')
         paragrafoSegundaEscolha.classList.remove('animacao-aparecer')
         paragrafoSegundaEscolha.textContent = ''
         btnAvancar.classList.add('none')
         body.style.background = '#006400 url(../image/fundo-floresta.webp)no-repeat top center'
-        personagem.setAttribute('src', 'image/mago.webp')
         paragrafoPrimeiraEscolha.classList.add('animacao-aparecer')
         paragrafoPrimeiraEscolha.textContent = 'Agora, viajante corajoso, tua missão é clara. Explore as terras de Eldoria, converse com as criaturas mágicas, busque conhecimento nas antigas bibliotecas elficas, forje alianças com anões nas profundezas das montanhas e ganhe a confiança das fadas nos bosques encantados. Reúne artefatos perdidos, aprimora tuas habilidades mágicas e prepara-te para confrontar Malvagor.'
         setTimeout(() => {
@@ -78,13 +85,12 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function historiaMalvagor() {
+        personagem.classList.add('none')
         audio.play()
         btnAvancar.classList.add('none')
-        personagem.setAttribute('src', 'image/rosto-malfagor.webp')
-        personagem.classList.remove('animacao-subindo')
-        personagem.classList.add('animacao-aparecer')
+        rostoMalfagor.classList.remove('none')
+        rostoMalfagor.classList.add('animacao-aparecer')
         mudarConteudo.mudarAparenciaElemento(body, 'none', '#000000', undefined)
-        personagem.style.marginTop = '30px'
         dialogoEscolha.classList.add('none')
         paragrafoSegundaEscolha.classList.remove('animacao-esquerda')
         paragrafoPrimeiraEscolha.textContent = 'Malvagor, sombrio por natureza, emerge das profundezas do desconhecido. Uma vez um ser de luz corrompido por ambições desmedidas, sua busca por poder desencadeou uma onda de trevas sobre Eldoria. Utilizando artes proibidas, despertou criaturas antigas e enegreceu corações leais'

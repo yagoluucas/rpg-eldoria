@@ -1,37 +1,3 @@
-.none {
-    display: none;
-}
-.animacao-esquerda {
-animation: animacao-esquerda 0.9s forwards;
-}
-
-@keyframes animacao-esquerda {
-    0% {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.animacao-aparecer {
-    animation: animacao-aparecer 1s forwards;
-}
-
-@keyframes animacao-aparecer {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-.bold {
-    font-weight: 700;
-    text-transform: uppercase;
+body {
+    background: #006400 url(../image/fundo-floresta.webp)no-repeat top center;
 }
