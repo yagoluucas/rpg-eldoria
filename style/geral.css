@@ -12,10 +12,9 @@ input {
     border-radius: 10px;
 }
 
-p {
-    margin: 10px auto 20px auto;
+p, h1 {
+    margin-bottom: 20px;
 }
-
 button {
     border: none;
     margin-left: 5px;
@@ -51,10 +50,12 @@ body {
     height: 100vh;
 }
 
-body.fim-capitulo {
+body.carregar-conteudo {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: none;
+    background-color: #000;
 }
 
 h1.final-capitulo {
@@ -91,9 +92,8 @@ main div {
     border-top: 2px solid #0c3a96;
 }
 
-.Althor-nome {
+.aliado-nome {
     color: #3366cc;
-    font-size: 2rem;
 }
 
 h1 {
@@ -103,7 +103,6 @@ h1 {
 
 p {
     font-size: 1.6rem;
-    margin: 10px auto;
 }
 
 .animacao-subindo {
@@ -122,7 +121,6 @@ p {
 
 .nome-vilao {
     color: #FF0000;
-    font-size: 2.3rem;
 }
 
 .none {

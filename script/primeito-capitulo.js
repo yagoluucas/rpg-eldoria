@@ -7,7 +7,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const paragrafoPrimeiraEscolha = document.querySelector('.js-primeira-escolha');
     const paragrafoSegundaEscolha = document.querySelector('.js-segunda-escolha');
     const personagem = document.querySelector('.js-personagem')
-    const body = document.body;
     const main = document.querySelector('main')
     const rostoMalfagor = document.querySelector('.js-malfagor')
     const audio = document.querySelector('.js-som-terror')
@@ -16,16 +15,14 @@ window.addEventListener('DOMContentLoaded', () => {
         btnAvancar.classList.add('none')
         personagem.classList.remove('none')
         personagem.classList.add('animacao-subindo')
-        paragrafoPrimeiraEscolha.classList.remove('none')
-        paragrafoPrimeiraEscolha.classList.add('animacao-aparecer')
         paragrafoSegundaEscolha.classList.remove('none')
-            paragrafoSegundaEscolha.textContent = 'Viajante intrépido, em Eldoria, onde elfos, anões e fadas tecem o cenário mágico, uma antiga sombra ameaça o equilíbrio. Tu, escolhido, és chamado para enfrentar o mal que se ergue. Com a aliança de criaturas lendárias como centauros, grifos e ninfas, tua jornada decidirá o destino desse reino. Ergue-te, pois a esperança de Eldoria repousa em teu coração corajoso.'
-            paragrafoSegundaEscolha.classList.add('animacao-esquerda')
-            setTimeout(() => {
-                btnComecarJornada.textContent = 'Começar Jornada'
-                btnComecarJornada.classList.remove('none')
-                btnComecarJornada.classList.add('animacao-aparecer')
-            }, 4000)
+        paragrafoSegundaEscolha.textContent = 'Viajante intrépido, em Eldoria, onde elfos, anões e fadas tecem o cenário mágico, uma antiga sombra ameaça o equilíbrio. Tu, escolhido, és chamado para enfrentar o mal que se ergue. Com a aliança de criaturas lendárias como centauros, grifos e ninfas, tua jornada decidirá o destino desse reino. Ergue-te, pois a esperança de Eldoria repousa em teu coração corajoso.'
+        paragrafoSegundaEscolha.classList.add('animacao-esquerda')
+        setTimeout(() => {
+            btnComecarJornada.textContent = 'Começar Jornada'
+            btnComecarJornada.classList.remove('none')
+            btnComecarJornada.classList.add('animacao-aparecer')
+        }, 4000)
     }
 
     function introducao() {
@@ -38,14 +35,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function terminarCapitulo() {
         main.classList.add('none')
-        body.classList.add('fim-capitulo')
-        mudarConteudo.mudarAparenciaElemento(body, 'none', '#000000', undefined)
+        geral.body.classList.add('carregar-conteudo')
+        mudarConteudo.mudarAparenciaElemento(geral.body, 'none', '#000000', undefined)
         let textoFecharCapitulo = document.createElement('h1')
         textoFecharCapitulo.textContent = 'Fim do capitulo 1....'
-        body.appendChild(textoFecharCapitulo)
+        geral.body.appendChild(textoFecharCapitulo)
         textoFecharCapitulo.classList.add('final-capitulo')
         setTimeout(() => {
-            window.location.pathname = '/html/segundo-capitulo.html'
+            textoFecharCapitulo.textContent = 'Inicio do capitulo 2...'
+            textoFecharCapitulo.classList.add('animacao-aparecer')            
+            setTimeout(() => {
+                window.location.pathname = '/html/segundo-capitulo.html'
+            }, 5000)
         }, 5000)
     }
 
@@ -55,12 +56,12 @@ window.addEventListener('DOMContentLoaded', () => {
         paragrafoSegundaEscolha.classList.remove('animacao-aparecer')
         paragrafoSegundaEscolha.textContent = ''
         btnAvancar.classList.add('none')
-        body.style.background = '#006400 url(../image/fundo-floresta.webp)no-repeat top center'
+        geral.body.style.background = '#006400 url(../image/fundo-floresta.webp)no-repeat top center'
         paragrafoPrimeiraEscolha.classList.add('animacao-aparecer')
         paragrafoPrimeiraEscolha.textContent = 'Agora, viajante corajoso, tua missão é clara. Explore as terras de Eldoria, converse com as criaturas mágicas, busque conhecimento nas antigas bibliotecas elficas, forje alianças com anões nas profundezas das montanhas e ganhe a confiança das fadas nos bosques encantados. Reúne artefatos perdidos, aprimora tuas habilidades mágicas e prepara-te para confrontar Malvagor.'
         setTimeout(() => {
             paragrafoSegundaEscolha.classList.add('animacao-aparecer')
-            paragrafoSegundaEscolha.textContent = 'Cada escolha que fizeres moldará tua jornada, influenciando o destino de Eldoria. A treva aguarda, mas a luz repousa em teu coração. O reino depende de tua bravura. Parte agora, destemido, e escreve tua lenda neste mundo de magia e mistério.'
+            paragrafoSegundaEscolha.textContent = 'Cada escolha que fizeres moldará tua jornada, influenciando o destino de Eldoria. A treva aguarda, mas a luz repousa em teu coração. O reino depende de tua bravura. Parta agora, e escreva sua lenda neste mundo de magia e mistério.'
             setTimeout(() => {
                 btnAvancar.classList.remove('none')
                 btnAvancar.classList.add('animacao-aparecer')
@@ -72,12 +73,12 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function historiaMalvagor() {
-        personagem.classList.add('none')
         audio.play()
+        personagem.classList.add('none')
         btnAvancar.classList.add('none')
         rostoMalfagor.classList.remove('none')
         rostoMalfagor.classList.add('animacao-aparecer')
-        mudarConteudo.mudarAparenciaElemento(body, 'none', '#000000', undefined)
+        mudarConteudo.mudarAparenciaElemento(geral.body, 'none', '#000000', undefined)
         dialogoEscolha.classList.add('none')
         paragrafoSegundaEscolha.classList.remove('animacao-esquerda')
         paragrafoPrimeiraEscolha.textContent = 'Malvagor, sombrio por natureza, emerge das profundezas do desconhecido. Uma vez um ser de luz corrompido por ambições desmedidas, sua busca por poder desencadeou uma onda de trevas sobre Eldoria. Utilizando artes proibidas, despertou criaturas antigas e enegreceu corações leais'
@@ -100,13 +101,14 @@ window.addEventListener('DOMContentLoaded', () => {
         paragrafoPrimeiraEscolha.classList.remove('animacao-aparecer')
         paragrafoSegundaEscolha.classList.remove('animacao-esquerda')
         btnAvancar.removeEventListener('click', dialogoInicial)
-        dialogoEscolha.style.fontSize = '1.6rem';
-        dialogoEscolha.classList.add('animacao-esquerda')       
-        dialogoEscolha.innerHTML = 'Como informei anteriormente, sou o mestre dos magos, meu nome é <span class="Althor-nome">Althor</span> guardião da antiga sabedoria e condutor de tua jornada épica'
+        dialogoEscolha.style.margimBottom = '5px'
+        dialogoEscolha.classList.add('animacao-esquerda')
+        dialogoEscolha.innerHTML = 'Como informei anteriormente, sou o mestre dos magos, meu nome é <span class="aliado-nome">Althor</span> guardião da antiga sabedoria e condutor de tua jornada épica'
         btnComecarJornada.remove()
         paragrafoSegundaEscolha.textContent = ''
         paragrafoPrimeiraEscolha.textContent = ''
         setTimeout(() => {
+            paragrafoPrimeiraEscolha.classList.remove('none')
             paragrafoPrimeiraEscolha.classList.add('animacao-esquerda')
             paragrafoPrimeiraEscolha.textContent = 'Nobre viajante, nossa terra era feliz, onde seres místicos brincavam e confraternizavam pelos campos'
             setTimeout(() => {
