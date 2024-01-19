@@ -1,20 +1,21 @@
 import * as mudarConteudo from './mudar-conteudo.js';
 import * as geral from './script.js'
 window.addEventListener('DOMContentLoaded', () => {
+
+    const personagem = new geral.AlterarConteudo('.js-personagem')
     const dialogoEscolha = document.querySelector('h1.dialogo-escolha')
     const btnComecarJornada = document.querySelector('button.js-comecar-jornada-btn');
-    const btnAvancar = document.querySelector('button.js-btn-avancar');
+    const btnAvancar = new geral.AlterarConteudo('button.js-btn-avancar');
     const paragrafoPrimeiraEscolha = document.querySelector('.js-primeira-escolha');
-    const paragrafoSegundaEscolha = document.querySelector('.js-segunda-escolha');
-    const personagem = document.querySelector('.js-personagem')
+    const paragrafoSegundaEscolha = document.querySelector('.js-segunda-escolha');    
     const main = document.querySelector('main')
-    const rostoMalfagor = document.querySelector('.js-malfagor')
+    const rostoMalfagor = new geral.AlterarConteudo('.js-malfagor')
     const audio = document.querySelector('.js-som-terror')
     function dialogoInicial() {
         dialogoEscolha.classList.add('none')
-        btnAvancar.classList.add('none')
-        personagem.classList.remove('none')
-        personagem.classList.add('animacao-subindo')
+        btnAvancar.adicionarClasse('none')
+        personagem.removerClasse('none')
+        personagem.adicionarClasse('animacao-subindo')
         paragrafoSegundaEscolha.classList.remove('none')
         paragrafoSegundaEscolha.textContent = 'Viajante intrépido, em Eldoria, onde elfos, anões e fadas tecem o cenário mágico, uma antiga sombra ameaça o equilíbrio. Tu, escolhido, és chamado para enfrentar o mal que se ergue. Com a aliança de criaturas lendárias como centauros, grifos e ninfas, tua jornada decidirá o destino desse reino. Ergue-te, pois a esperança de Eldoria repousa em teu coração corajoso.'
         paragrafoSegundaEscolha.classList.add('animacao-esquerda')
@@ -27,8 +28,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function introducao() {
         dialogoEscolha.textContent = 'Bem vindo ao reino de Eldoria caro guerreiro(a). Tuas escolhas moldarão o destino de Eldoria. Prepara-te para uma jornada épica'
-        btnAvancar.textContent = 'Continuar'
-        btnAvancar.addEventListener('click', dialogoInicial)
+        btnAvancar.alterarTexto('Continuar') 
+        btnAvancar.seletor.addEventListener('click', dialogoInicial)
     }
 
     introducao()
@@ -49,11 +50,11 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function fimHistoriaMalvagor() {
-        rostoMalfagor.classList.add('none')
-        personagem.classList.remove('none')
+        rostoMalfagor.adicionarClasse('none')
+        personagem.removerClasse('none')
         paragrafoSegundaEscolha.classList.remove('animacao-aparecer')
         paragrafoSegundaEscolha.textContent = ''
-        btnAvancar.classList.add('none')
+        btnAvancar.adicionarClasse('none')
         geral.body.style.background = '#006400 url(../image/fundo-floresta.webp)no-repeat top center'
         paragrafoPrimeiraEscolha.classList.add('animacao-aparecer')
         paragrafoPrimeiraEscolha.textContent = 'Agora, viajante corajoso, tua missão é clara. Explore as terras de Eldoria, converse com as criaturas mágicas, busque conhecimento nas antigas bibliotecas elficas, forje alianças com anões nas profundezas das montanhas e ganhe a confiança das fadas nos bosques encantados. Reúne artefatos perdidos, aprimora tuas habilidades mágicas e prepara-te para confrontar Malvagor.'
@@ -61,21 +62,21 @@ window.addEventListener('DOMContentLoaded', () => {
             paragrafoSegundaEscolha.classList.add('animacao-aparecer')
             paragrafoSegundaEscolha.textContent = 'Cada escolha que fizeres moldará tua jornada, influenciando o destino de Eldoria. A treva aguarda, mas a luz repousa em teu coração. O reino depende de tua bravura. Parta agora, e escreva sua lenda neste mundo de magia e mistério.'
             setTimeout(() => {
-                btnAvancar.classList.remove('none')
-                btnAvancar.classList.add('animacao-aparecer')
-                btnAvancar.removeEventListener('click', fimHistoriaMalvagor)
-                btnAvancar.textContent = 'Iniciar aventura...'
-                btnAvancar.addEventListener('click', terminarCapitulo)
+                btnAvancar.removerClasse('none')
+                btnAvancar.adicionarClasse('animacao-aparecer')
+                btnAvancar.seletor.removeEventListener('click', fimHistoriaMalvagor)
+                btnAvancar.alterarTexto('Iniciar aventura...')
+                btnAvancar.seletor.addEventListener('click', terminarCapitulo)
             }, 5000)
         }, 5000)
     }
 
     function historiaMalvagor() {
         audio.play()
-        personagem.classList.add('none')
-        btnAvancar.classList.add('none')
-        rostoMalfagor.classList.remove('none')
-        rostoMalfagor.classList.add('animacao-aparecer')
+        personagem.adicionarClasse('none')
+        btnAvancar.adicionarClasse('none')
+        rostoMalfagor.removerClasse('none')
+        rostoMalfagor.adicionarClasse('animacao-aparecer')
         mudarConteudo.mudarAparenciaElemento(geral.body, 'none', '#000000', undefined)
         dialogoEscolha.classList.add('none')
         paragrafoSegundaEscolha.classList.remove('animacao-esquerda')
@@ -87,18 +88,18 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 4000)
 
         setTimeout(() => {
-            btnAvancar.removeEventListener('click', historiaMalvagor)
-            btnAvancar.classList.remove('none')
-            btnAvancar.textContent = 'Continuar'
-            btnAvancar.style.backgroundColor = '#006400'
-            btnAvancar.addEventListener('click', fimHistoriaMalvagor)
+            btnAvancar.seletor.removeEventListener('click', historiaMalvagor)
+            btnAvancar.removerClasse('none')
+            btnAvancar.alterarTexto('Continuar')
+            btnAvancar.seletor.style.backgroundColor = '#006400'
+            btnAvancar.seletor.addEventListener('click', fimHistoriaMalvagor)
         }, 9000)
     }
     btnComecarJornada.addEventListener('click', () => {
         dialogoEscolha.classList.remove('none')
         paragrafoPrimeiraEscolha.classList.remove('animacao-aparecer')
         paragrafoSegundaEscolha.classList.remove('animacao-esquerda')
-        btnAvancar.removeEventListener('click', dialogoInicial)
+        btnAvancar.seletor.removeEventListener('click', dialogoInicial)
         dialogoEscolha.style.margimBottom = '5px'
         dialogoEscolha.classList.add('animacao-esquerda')
         dialogoEscolha.innerHTML = 'Como informei anteriormente, sou o mestre dos magos, meu nome é <span class="aliado-nome">Althor</span> guardião da antiga sabedoria e condutor de tua jornada épica'
@@ -113,12 +114,12 @@ window.addEventListener('DOMContentLoaded', () => {
                 paragrafoSegundaEscolha.classList.add('animacao-esquerda')
                 paragrafoSegundaEscolha.innerHTML = 'Contudo, a alegria foi interrompida pela chegada de um mal ancestral, conhecido como <span class="nome-vilao">Malvagor</span>'
                 setTimeout(() => {
-                    btnAvancar.classList.remove('none')
-                    btnAvancar.classList.add('btn-avancar')
-                    btnAvancar.classList.add('animacao-aparecer')
-                    btnAvancar.textContent = 'Ver historia de Malvagor'
-                    btnAvancar.style.backgroundColor = '#FF0000'
-                    btnAvancar.addEventListener('click', historiaMalvagor)
+                    btnAvancar.removerClasse('none')
+                    btnAvancar.adicionarClasse('btn-avancar')
+                    btnAvancar.removerClasse('animacao-aparecer')
+                    btnAvancar.alterarTexto('Ver historia de Malvagor')
+                    btnAvancar.seletor.style.backgroundColor = '#FF0000'
+                    btnAvancar.seletor.addEventListener('click', historiaMalvagor)
                 }, 3000)
             }, 3000)
         }, 3000)

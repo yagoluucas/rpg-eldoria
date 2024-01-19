@@ -11,15 +11,3 @@ export function mudarAparenciaElemento(elementoDom , foto, corFundo, corLetra) {
         elementoDom.style.color = corLetra;
     }
 }
-
-export function mudarTexto (primeiroParagrafo, textoPrimeiroParagrafo, segundoParagrafo, textoSegundoParagrafo) {
-
-    if(primeiroParagrafo != null && textoPrimeiroParagrafo != null) {
-        primeiroParagrafo.textContent = textoPrimeiroParagrafo
-    }
-
-    if(segundoParagrafo != null && textoSegundoParagrafo != null) {
-        segundoParagrafo.textContent = textoSegundoParagrafo
-    }
-
-}
