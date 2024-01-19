@@ -19,13 +19,13 @@ button {
     border: none;
     margin-left: 5px;
     transition: 0.4s;
-    background-color: #006400;
+    background-color: #228B22;
     color: #fff;
     cursor: pointer;
 }
 
 button:hover {
-    background: #006400;
+    background: #165916;
     color: #fff;
 }
 

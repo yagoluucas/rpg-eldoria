@@ -37,10 +37,8 @@ window.addEventListener('DOMContentLoaded', () => {
         main.classList.add('none')
         geral.body.classList.add('carregar-conteudo')
         mudarConteudo.mudarAparenciaElemento(geral.body, 'none', '#000000', undefined)
-        let textoFecharCapitulo = document.createElement('h1')
-        textoFecharCapitulo.textContent = 'Fim do capitulo 1....'
-        geral.body.appendChild(textoFecharCapitulo)
-        textoFecharCapitulo.classList.add('final-capitulo')
+        let textoFecharCapitulo = geral.criarH1NoBody('Final do capitulo 1...')
+        document.body.appendChild(textoFecharCapitulo)
         setTimeout(() => {
             textoFecharCapitulo.textContent = 'Inicio do capitulo 2...'
             textoFecharCapitulo.classList.add('animacao-aparecer')            
