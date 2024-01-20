@@ -1,14 +1,13 @@
 import * as mudarConteudo from './mudar-conteudo.js';
 import * as geral from './script.js'
 window.addEventListener('DOMContentLoaded', () => {
-
+    
     const personagem = new geral.AlterarConteudo('.js-personagem')
     const dialogoEscolha = document.querySelector('h1.dialogo-escolha')
     const btnComecarJornada = document.querySelector('button.js-comecar-jornada-btn');
     const btnAvancar = new geral.AlterarConteudo('button.js-btn-avancar');
     const paragrafoPrimeiraEscolha = document.querySelector('.js-primeira-escolha');
     const paragrafoSegundaEscolha = document.querySelector('.js-segunda-escolha');    
-    const main = document.querySelector('main')
     const rostoMalfagor = new geral.AlterarConteudo('.js-malfagor')
     const audio = document.querySelector('.js-som-terror')
     function dialogoInicial() {
@@ -35,7 +34,7 @@ window.addEventListener('DOMContentLoaded', () => {
     introducao()
 
     function terminarCapitulo() {
-        main.classList.add('none')
+        geral.main.adicionarClasse('none')
         geral.body.classList.add('carregar-conteudo')
         mudarConteudo.mudarAparenciaElemento(geral.body, 'none', '#000000', undefined)
         let textoFecharCapitulo = geral.criarH1NoBody('Final do capitulo 1...')

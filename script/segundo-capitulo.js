@@ -1,16 +1,13 @@
 import * as geral from './script.js';
 import * as mudarConteudo from './mudar-conteudo.js'
 window.addEventListener('DOMContentLoaded' , () => {
+let tituloTrocaDeCenario = geral.criarH1NoBody('Indo até a floresta elfica...')
 const escolhasPersonagem = document.querySelectorAll('.js-escolha')
 const falaPersonagem = document.querySelector('.secao-dialogo h1')
 const dialogos = document.querySelectorAll('.js-dialogo')
 const btnAvancar = document.querySelector('.js-btn-avancar')
 
 function funcaoFlorestaElfica() {
-    // const somFloresta = setInterval(() => {
-    //     geral.somFloresta.play()
-    // })
-
     falaPersonagem.classList.add('animacao-esquerda')
     falaPersonagem.innerHTML = '<span class="aliado-nome">Althor</span>: Escolheste o caminho das árvores ancestrais e da magia élfica'
     setTimeout(() => {
@@ -51,13 +48,23 @@ escolhasPersonagem.forEach((opcao) => {
 })
 
 function irParaFlorestaElfica() {
+    btnAvancar.removeEventListener('click', irParaFlorestaElfica)
+    geral.main.adicionarClasse('none')
     geral.body.classList.add('carregar-conteudo')
-    geral.imagens[0].classList.add('none')
-    let textoIndoParaFloresta = geral.criarH1NoBody('Indo até a floresta elfica...')
-    geral.body.appendChild(textoIndoParaFloresta)
-    // setTimeout(() => {
-    //     geral.body.classList.remove('carregar-conteudo')
-    // },10000)
+    geral.imagemAliado.adicionarClasse('none')
+    geral.body.appendChild(tituloTrocaDeCenario)    
+    setTimeout(() => {
+        const somFloresta = setInterval(() => {
+            geral.somFloresta.play()
+        })
+
+        setTimeout(() => {
+            geral.body.classList.remove('carregar-conteudo')
+            geral.main.removerClasse('none')
+            geral.imagemAliado.removerClasse('none')
+            geral.imagemAliado.seletor.setAttribute('src', '../image/elfo-floresta.webp')
+        }, 2000)
+    },6000)
 }
 
 })
