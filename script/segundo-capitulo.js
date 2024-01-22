@@ -8,6 +8,22 @@ window.addEventListener('DOMContentLoaded', () => {
     const btnAvancar = document.querySelector('.js-btn-avancar');
     let regiaoEscolhida = '';
     let somAmbiente;
+    let tempoDeCarregamento = 6000;
+    let tempoCarregamentoSecundario = 4000;
+    let carregamentoInterativo;
+    let variavelIncremento = 0;
+
+    function funcaoCarregamentoInterativo(textoCarregamento) {
+        return setInterval(() => {
+            if(variavelIncremento >= 3) {
+                variavelIncremento = 0
+                textoCarregamento.textContent = textoCarregamento.textContent.slice(0, textoCarregamento.textContent.indexOf('.'))
+            } else {
+                variavelIncremento += 1
+                textoCarregamento.textContent += '.'
+            }                 
+        }, 500)
+    }
 
     escolhasPersonagem.forEach(opcao => opcao.addEventListener('click', escolhasSegundoCapitulo))
 
@@ -58,21 +74,24 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 3000)
     }
 
-    function irParaRegiao() {       
+    function irParaRegiao() {          
         btnAvancar.removeEventListener('click', irParaRegiao)
         geral.main.adicionarClasse('none')
         geral.body.classList.add('carregar-conteudo')
         geral.imagemAliado.adicionarClasse('none')
         geral.body.appendChild(tituloTrocaDeCenario)
         switch(regiaoEscolhida) {
+            // criar uma função para passar o dialogo
             case "Floresta Élfica":
-                tituloTrocaDeCenario.textContent = 'Indo até a floresta Élfica...'
+                tituloTrocaDeCenario.textContent = 'Indo até a floresta Élfica'
+                carregamentoInterativo = funcaoCarregamentoInterativo(tituloTrocaDeCenario)
                 setTimeout(() => {
+                    clearInterval(carregamentoInterativo)
                     somAmbiente = setInterval(() => {
                         geral.somFloresta.play()
                     })
         
-                    tituloTrocaDeCenario.textContent = 'Chegando lá voce avista um elfo em sua frente...'
+                    tituloTrocaDeCenario.textContent = 'Chegando lá voce avista um elfo em sua frente'
                     setTimeout(() => {
                         falaPersonagem.innerHTML = '<span class="aliado-nome">Desconhecido</span>: Alto lá forasteiro, quem és tu ?'
                         dialogos[0].classList.add('none')
@@ -88,14 +107,17 @@ window.addEventListener('DOMContentLoaded', () => {
                         geral.main.removerClasse('none')
                         geral.imagemAliado.removerClasse('none')
                         geral.imagemAliado.seletor.setAttribute('src', '../image/elfo-floresta.webp')
-                    }, 4000)
-                }, 6000)
+                    }, tempoCarregamentoSecundario)
+                }, tempoDeCarregamento)
             break    
             case "Montanhas Anor":
                 tituloTrocaDeCenario.textContent = 'Indo até a Montanha Anor...'
                 setTimeout(() => {
                     tituloTrocaDeCenario.textContent = 'Chegando lá voce avista um anão em sua frente...'
-                })
+                    setInterval(() => {
+                        falaPersonagem.innerHTML = '<span class="aliado-nome">Desconhecido</span>: Revele-se, estranho, ou enfrente a ira das profundezas'
+                    }, tempoCarregamentoSecundario)
+                }, tempoDeCarregamento)
             break    
         }
     
