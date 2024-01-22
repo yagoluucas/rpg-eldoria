@@ -8,26 +8,37 @@ window.addEventListener('DOMContentLoaded', () => {
     const btnAvancar = document.querySelector('.js-btn-avancar')
     let regiaoInicialEscolhida = ''
 
-    function funcaoFlorestaElfica() {
+    function escolhaRegiao(regiaoInicialEscolhida) {
         falaPersonagem.classList.add('animacao-esquerda')
-        falaPersonagem.innerHTML = '<span class="aliado-nome">Althor</span>: Escolheste o caminho das árvores ancestrais e da magia élfica'
+        let segundaFala = ''
+        switch(regiaoInicialEscolhida) {
+            case "Floresta Élfica":
+                falaPersonagem.innerHTML = '<span class="aliado-nome">Althor</span>: Escolheste o caminho das árvores ancestrais e da magia élfica'
+                segundaFala = '<span class="aliado-nome">Althor</span>: Teus passos agora seguem a dança das folhas e o sussurro das árvores. Na Floresta Élfica, aliados sábios e segredos aguardam tua jornada. Que a luz dos elfos guie teus passos, nobre aventureiro'
+            break
+            
+            case "Montanhas Anor":
+                falaPersonagem.innerHTML = '<span class="aliado-nome">Althor</span>:  Ao escolher o caminho das Montanhas Anor, adentras um reino rochoso, onde anões mestres da forja e segredos antigas aguardam tua jornada corajosa'
+                segundaFala = 'Testando'
+
+            break    
+        }
+                
         setTimeout(() => {
             dialogos[0].classList.remove('none')
             dialogos[0].classList.add('animacao-esquerda')
-            dialogos[0].innerHTML = '<span class="aliado-nome">Althor</span>: Teus passos agora seguem a dança das folhas e o sussurro das árvores. Na Floresta Élfica, aliados sábios e segredos aguardam tua jornada. Que a luz dos elfos guie teus passos, nobre aventureiro'
+            dialogos[0].innerHTML = segundaFala
             dialogos[0].classList.remove('animacao-esquerda')
             setTimeout(() => {
                 btnAvancar.classList.remove('none')
                 btnAvancar.classList.add('animacao-aparecer')
-                btnAvancar.addEventListener('click', irParaFlorestaElfica)
+                btnAvancar.addEventListener('click', () => {
+                    irParaRegiao()
+                })
             }, 8000)
         }, 3000)
 
 
-    }
-
-    function funcaoMontanhasAnor() {
-        falaPersonagem.innerHTML = '<span class="aliado-nome">Althor</span>:  Ao escolher o caminho das Montanhas Anor, adentras um reino rochoso, onde anões mestres da forja e segredos antigas aguardam tua jornada corajosa'
     }
 
     function escolhasSegundoCapitulo() {
@@ -38,20 +49,20 @@ window.addEventListener('DOMContentLoaded', () => {
         switch (this.textContent) {
             case "Floresta Élfica":
                 regiaoInicialEscolhida = 'Floresta Élfica'
-                funcaoFlorestaElfica()
                 break
 
             case "Montanhas Anor":
                 regiaoInicialEscolhida = 'Montanhas Anor'
-                funcaoMontanhasAnor()
                 break
         }
+
+        escolhaRegiao(regiaoInicialEscolhida)
     }
 
     escolhasPersonagem.forEach(opcao => opcao.addEventListener('click', escolhasSegundoCapitulo))
 
-    function irParaFlorestaElfica() {
-        btnAvancar.removeEventListener('click', irParaFlorestaElfica)
+    function irParaRegiao() {
+        btnAvancar.removeEventListener('click', irParaRegiao)
         geral.main.adicionarClasse('none')
         geral.body.classList.add('carregar-conteudo')
         geral.imagemAliado.adicionarClasse('none')
@@ -70,7 +81,9 @@ window.addEventListener('DOMContentLoaded', () => {
                     escolhasPersonagem[0].textContent = 'Sou um aventureiro'
                     escolhasPersonagem[1].textContent = 'Sou um guerreiro que veio enfrentar Malfagor'
                     opcao.parentElement.classList.remove('none')
-                    opcao.addEventListener('click', dialogoAposEscolherRegiao)
+                    opcao.addEventListener('click', () => {
+                        dialogoAposEscolherRegiao(regiaoInicialEscolhida, opcao)
+                    })
                 })
                 geral.main.removerClasse('none')
                 geral.imagemAliado.removerClasse('none')
@@ -79,18 +92,27 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 6000)
     }
 
-    function dialogoAposEscolherRegiao() {
+    function dialogoAposEscolherRegiao(regiao, click) {
         dialogos[0].classList.remove('none')
         falaPersonagem.classList.add('none')
         escolhasPersonagem[0].parentElement.classList.add('none')
-        switch (this.textContent) {
-            case "Sou um aventureiro":
-                dialogos[0].innerHTML = 'Ora, Ora, há muito tempos não vejo aventureiros por aqui, pois bem meu nome é <span class="aliado-nome">Aldrin</span> <br>E o que procura na grande floresta elfica ?'
-                break;
-            case "Sou um guerreiro que veio enfrentar Malfagor":
-                dialogos[0].innerHTML = 'HAHAHAH pelo visto é um pequeno comediante, por sinal meu nome é <span class="aliado-nome">Aldrin</span> <br> E como voce acha que vai derrotar Malfagor ?'
-                break;
+        switch(regiao) {
+            case "Floresta Élfica":
+                switch (click.textContent) {
+                    case "Sou um aventureiro":
+                        dialogos[0].innerHTML = 'Ora, Ora, há muito tempos não vejo aventureiros por aqui, pois bem meu nome é <span class="aliado-nome">Aldrin</span> <br>E o que procura na grande floresta elfica ?'
+                        break;
+                    case "Sou um guerreiro que veio enfrentar Malfagor":
+                        dialogos[0].innerHTML = 'HAHAHAH pelo visto é um pequeno comediante, por sinal meu nome é <span class="aliado-nome">Aldrin</span> <br> E como voce acha que vai derrotar Malfagor ?'
+                        break;
+                }
+            break;
+            
+            case "Montanhas Anor":
+
+            break;
         }
+        
         dialogos[0].classList.add('animacao-esquerda')
         
     }
