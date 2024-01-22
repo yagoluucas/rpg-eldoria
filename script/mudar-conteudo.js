@@ -18,8 +18,18 @@ export function mudarOpcoesEscolhas(capituloPersonagem, regiaoPersonagem, opcoes
     switch (capituloPersonagem){
         case "capitulo 2":
             switch(regiaoPersonagem) {
-                case "caldeirao de anor":
+                case "Floresta Élfica":
+                    switch(escolhaPersonagem) {
+                        case "Sou um guerreiro que veio enfrentar Malfagor":
+                            opcoes[0].textContent = 'Testando'
+                            opcoes[1].textContent = 'Testando 2'
+                        break    
+                    }
 
+                break    
             }
+        break    
     }
+
+    return opcoes
 }

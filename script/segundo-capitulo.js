@@ -70,9 +70,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     escolhasPersonagem[0].textContent = 'Sou um aventureiro'
                     escolhasPersonagem[1].textContent = 'Sou um guerreiro que veio enfrentar Malfagor'
                     opcao.parentElement.classList.remove('none')
-                    opcao.addEventListener('click', () => {
-                        dialogoAposEscolherRegiao('Floresta Élfica')
-                    })
+                    opcao.addEventListener('click', dialogoAposEscolherRegiao)
                 })
                 geral.main.removerClasse('none')
                 geral.imagemAliado.removerClasse('none')
@@ -81,7 +79,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 6000)
     }
 
-    function dialogoAposEscolherRegiao(regiao) {
+    function dialogoAposEscolherRegiao() {
         dialogos[0].classList.remove('none')
         falaPersonagem.classList.add('none')
         escolhasPersonagem[0].parentElement.classList.add('none')
@@ -93,10 +91,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 dialogos[0].innerHTML = 'HAHAHAH pelo visto é um pequeno comediante, por sinal meu nome é <span class="aliado-nome">Aldrin</span> <br> E como voce acha que vai derrotar Malfagor ?'
                 break;
         }
-
-        mudarConteudo.mudarOpcoesEscolhas('capitulo 2', regiao, dialogos, this.textContent)
-
         dialogos[0].classList.add('animacao-esquerda')
+        
     }
 
 })
