@@ -46,7 +46,6 @@ html,body {
 
 body {
     font-size: 62.5%;
-    background-size: cover;
     height: 100vh;
 }
 
@@ -73,6 +72,7 @@ img.personagem {
     max-width: 600px;
     min-width: 200px;
     margin-top: 15px;
+    height: 100vh;
 }
 
 section.secao-dialogo {

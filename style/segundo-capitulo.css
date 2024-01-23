@@ -1,3 +1,7 @@
 body {
     background: #006400 url(../image/fundo-floresta.webp)no-repeat top center;
 }
+
+body.montanha {
+    background: #8b4513 url(../image/fundo-montanha.webp)no-repeat top center;
+} 
