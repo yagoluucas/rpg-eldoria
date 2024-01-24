@@ -11,21 +11,8 @@ window.addEventListener('DOMContentLoaded', () => {
     let tempoDeCarregamento = 6000;
     let tempoCarregamentoSecundario = 4000;
     let carregamentoInterativo;
-    let variavelIncremento = 0;
-
-    function funcaoCarregamentoInterativo(textoCarregamento) {
-        return setInterval(() => {
-            if (variavelIncremento >= 3) {
-                variavelIncremento = 0
-                textoCarregamento.textContent = textoCarregamento.textContent.slice(0, textoCarregamento.textContent.indexOf('.'))
-            } else {
-                variavelIncremento += 1
-                textoCarregamento.textContent += '.'
-            }
-        }, 500)
-    }
-
     escolhasPersonagem.forEach(opcao => opcao.addEventListener('click', escolhasSegundoCapitulo))
+
 
     function escolhasSegundoCapitulo() {
         escolhasPersonagem.forEach(opcao => {
@@ -75,6 +62,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function irParaRegiao() {
+        btnAvancar.classList.add('none')
         escolhasPersonagem[0].textContent = 'Sou um aventureiro'
         escolhasPersonagem[1].textContent = 'Sou um guerreiro que veio enfrentar Malfagor'
         btnAvancar.removeEventListener('click', irParaRegiao)
@@ -82,10 +70,9 @@ window.addEventListener('DOMContentLoaded', () => {
         geral.body.classList.add('carregar-conteudo')
         geral.body.appendChild(tituloTrocaDeCenario)
         switch (regiaoEscolhida) {
-            // criar uma função para passar o dialogo
             case "Floresta Élfica":
                 tituloTrocaDeCenario.textContent = 'Indo até a floresta Élfica'
-                carregamentoInterativo = funcaoCarregamentoInterativo(tituloTrocaDeCenario)
+                carregamentoInterativo = geral.funcaoCarregamentoInterativo(tituloTrocaDeCenario)
                 setTimeout(() => {
                     clearInterval(carregamentoInterativo)
                     somAmbiente = setInterval(() => {
@@ -106,15 +93,15 @@ window.addEventListener('DOMContentLoaded', () => {
                 }, tempoDeCarregamento)
                 break
             case "Montanhas Anor":
-
-
                 tituloTrocaDeCenario.textContent = 'Indo até a Montanha Anor'
-                carregamentoInterativo = funcaoCarregamentoInterativo(tituloTrocaDeCenario)
+                carregamentoInterativo = geral.funcaoCarregamentoInterativo(tituloTrocaDeCenario)
                 setTimeout(() => {
+                    somAmbiente = setInterval(() => {
+                        geral.somMontanha.play()
+                    })
                     clearInterval(carregamentoInterativo)
                     tituloTrocaDeCenario.textContent = 'Chegando lá voce avista um anão em sua frente'
                     setTimeout(() => {
-                        // tituloTrocaDeCenario.classList.add('none')
                         geral.main.removerClasse('none')
                         dialogos[0].classList.add('none')
                         geral.body.classList.remove('carregar-conteudo')
@@ -134,12 +121,13 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function dialogoAposEscolherRegiao(e) {
+        let respostaEscolhida = e.target.textContent
         dialogos[0].classList.remove('none')
         falaPersonagem.classList.add('none')
         escolhasPersonagem[0].parentElement.classList.add('none')
         switch (regiaoEscolhida) {
             case "Floresta Élfica":
-                switch (e.target.textContent) {
+                switch (respostaEscolhida) {
                     case "Sou um aventureiro":
                         dialogos[0].innerHTML = 'Ora, Ora, há muito tempos não vejo aventureiros por aqui, pois bem meu nome é <span class="aliado-nome">Aldrin</span> <br>E o que procura na grande floresta elfica ?'
                         break;
@@ -150,12 +138,16 @@ window.addEventListener('DOMContentLoaded', () => {
                 break;
 
             case "Montanhas Anor":
-
-                break;
+                switch (respostaEscolhida) {
+                    case "Sou um aventureiro":
+                        dialogos[0].innerHTML = 'Aventureiro, palavras para mim são como o vento. Demonstre tua coragem. Aqui, sou <span class="aliado-nome">Dúrin</span>, Ferreiro da Montanha. E tu, forasteiro, o que procuras nas Montanhas ?'
+                        break;
+                    case "Sou um guerreiro que veio enfrentar Malfagor":
+                        dialogos[0].innerHTML = 'Guerreiro destemido, o humor é a sua piada? Eu sou <span class="aliado-nome">Dúrin</span>, Ferreiro da Montanha. Enfrentar Malfagor é motivo para risos. Fala, estranho, como pretendes fazê-lo?'
+                        break;
+                }
         }
-
         dialogos[0].classList.add('animacao-esquerda')
-
     }
 
 })
