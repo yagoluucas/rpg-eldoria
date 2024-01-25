@@ -12,6 +12,10 @@ input {
     border-radius: 10px;
 }
 
+p,h1,li {
+    max-width: 100%;
+}
+
 p, h1 {
     margin-bottom: 20px;
 }

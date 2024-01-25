@@ -13,7 +13,6 @@ window.addEventListener('DOMContentLoaded', () => {
     let carregamentoInterativo;
     escolhasPersonagem.forEach(opcao => opcao.addEventListener('click', escolhasSegundoCapitulo))
 
-
     function escolhasSegundoCapitulo() {
         escolhasPersonagem.forEach(opcao => {
             opcao.parentElement.classList.add('none')
@@ -121,10 +120,11 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function dialogoAposEscolherRegiao(e) {
+        escolhasPersonagem.forEach(e => e.removeEventListener('click', dialogoAposEscolherRegiao))
         let respostaEscolhida = e.target.textContent
         dialogos[0].classList.remove('none')
         falaPersonagem.classList.add('none')
-        escolhasPersonagem[0].parentElement.classList.add('none')
+        //opcão abaixo defini o que o aliado vai falar de acordo com região e escolha do usuario 
         switch (regiaoEscolhida) {
             case "Floresta Élfica":
                 switch (respostaEscolhida) {
@@ -143,11 +143,43 @@ window.addEventListener('DOMContentLoaded', () => {
                         dialogos[0].innerHTML = 'Aventureiro, palavras para mim são como o vento. Demonstre tua coragem. Aqui, sou <span class="aliado-nome">Dúrin</span>, Ferreiro da Montanha. E tu, forasteiro, o que procuras nas Montanhas ?'
                         break;
                     case "Sou um guerreiro que veio enfrentar Malfagor":
-                        dialogos[0].innerHTML = 'Guerreiro destemido, o humor é a sua piada? Eu sou <span class="aliado-nome">Dúrin</span>, Ferreiro da Montanha. Enfrentar Malfagor é motivo para risos. Fala, estranho, como pretendes fazê-lo?'
+                        dialogos[0].innerHTML = 'Guerreiro destemido, o humor é a sua piada? Eu sou <span class="aliado-nome">Dúrin</span>, Ferreiro da Montanha. Enfrentar Malfagor é motivo para risos. Fale, estranho, como pretendes fazê-lo?'
                         break;
                 }
         }
+
         dialogos[0].classList.add('animacao-esquerda')
+
+        escolhasPersonagem.forEach((element) => {
+            element.classList.add('animacao-esquerda')
+            element.addEventListener('click', EscolhaArmaAliado)
+            setTimeout(() => {
+                element.classList.remove('animacao-esquerda')
+            }, 1000)
+        })
+
+        //opção abaixo defini as opções de escolha do usuario de acordo com as opções que ele escolheu
+
+        switch (respostaEscolhida) {
+            case "Sou um aventureiro":
+                escolhasPersonagem[0].textContent = 'Procuro aliados para poder derrotar Malvagor'
+                escolhasPersonagem[1].textContent = 'Preciso ficar mais forte para assim conseguir derrotar malvagor'
+                break;
+
+            case "Sou um guerreiro que veio enfrentar Malfagor":
+                escolhasPersonagem[0].textContent = 'Com a aliança de um valente companheiro com certeza terei sucesso em minha missão'
+                escolhasPersonagem[1].textContent = 'Aprimorando meu arsenal, forjando novas armas e vestindo uma armadura imponente'
+                break;
+        }
+        
+    }
+
+    function EscolhaArmaAliado(event) {
+        if(event.target.textContent.startsWith('Procuro') || event.target.textContent.startsWith('Com')) {
+            // logica caso ele escolha a primeira opção 
+        } else {
+            // logica caso ele escolha a segunda opção
+        }
     }
 
 })
