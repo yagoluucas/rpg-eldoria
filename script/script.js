@@ -12,7 +12,7 @@ AlterarConteudo.prototype.removerClasse = function(classeRemover) {
 
 AlterarConteudo.prototype.alterarTexto = function(texto) {
     this.seletor.textContent = texto
-}
+} 
 
 export const body = document.body
 export const somFloresta = document.querySelector('.js-som-floresta')

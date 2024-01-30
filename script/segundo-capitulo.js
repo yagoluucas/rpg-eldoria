@@ -135,6 +135,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         dialogos[0].innerHTML = 'HAHAHAH pelo visto é um pequeno comediante, por sinal meu nome é <span class="aliado-nome">Aldrin</span> <br> E como voce acha que vai derrotar Malfagor ?'
                         break;
                 }
+                localStorage.nomeAliado = 'Aldrin'
                 break;
 
             case "Montanhas Anor":
@@ -146,6 +147,9 @@ window.addEventListener('DOMContentLoaded', () => {
                         dialogos[0].innerHTML = 'Guerreiro destemido, o humor é a sua piada? Eu sou <span class="aliado-nome">Dúrin</span>, Ferreiro da Montanha. Enfrentar Malfagor é motivo para risos. Fale, estranho, como pretendes fazê-lo?'
                         break;
                 }
+
+                localStorage.nomeAliado = 'Dúrin'
+            break    
         }
 
         dialogos[0].classList.add('animacao-esquerda')
@@ -176,9 +180,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function EscolhaArmaAliado(event) {
         if(event.target.textContent.startsWith('Procuro') || event.target.textContent.startsWith('Com')) {
-            // logica caso ele escolha a primeira opção 
+            dialogos[0].innerHTML = `<span class="aliado-nome">${localStorage.nomeAliado}</span>: bom, talvez `
         } else {
-            // logica caso ele escolha a segunda opção
+            dialogos[0].innerHTML = `<span class="aliado-nome">${localStorage.nomeAliado}</span>: `
         }
     }
 
