@@ -32,7 +32,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function escolhaRegiao() {
-        falaPersonagem.classList.add('animacao-esquerda')
+        mudarConteudo.anima('animacao-esquerda', falaPersonagem)
         let segundaFala = ''
         switch (regiaoEscolhida) {
             case "Floresta Élfica":
@@ -47,14 +47,12 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
         setTimeout(() => {
-            falaPersonagem.classList.remove('animacao-esquerda')
             dialogos[0].classList.remove('none')
             dialogos[0].innerHTML = segundaFala
-            dialogos[0].classList.add('animacao-esquerda')
+            mudarConteudo.anima('animacao-esquerda',  dialogos[0])
             setTimeout(() => {
-                dialogos[0].classList.remove('animacao-esquerda')
                 btnAvancar.classList.remove('none')
-                btnAvancar.classList.add('animacao-aparecer')
+                mudarConteudo.anima('animacao-aparecer', btnAvancar)
                 btnAvancar.addEventListener('click', irParaRegiao)
             }, 8000)
         }, 3000)
@@ -151,16 +149,9 @@ window.addEventListener('DOMContentLoaded', () => {
                 localStorage.nomeAliado = 'Dúrin'
             break    
         }
-
-        dialogos[0].classList.add('animacao-esquerda')
-
-        escolhasPersonagem.forEach((element) => {
-            element.classList.add('animacao-esquerda')
-            element.addEventListener('click', EscolhaArmaAliado)
-            setTimeout(() => {
-                element.classList.remove('animacao-esquerda')
-            }, 1000)
-        })
+        mudarConteudo.anima('animacao-esquerda', dialogos[0])
+        mudarConteudo.anima('animacao-esquerda', escolhasPersonagem)
+        escolhasPersonagem.forEach((element) => element.addEventListener('click', escolhaArmaAliado))
 
         //opção abaixo defini as opções de escolha do usuario de acordo com as opções que ele escolheu
 
@@ -178,12 +169,49 @@ window.addEventListener('DOMContentLoaded', () => {
         
     }
 
-    function EscolhaArmaAliado(event) {
-        if(event.target.textContent.startsWith('Procuro') || event.target.textContent.startsWith('Com')) {
-            dialogos[0].innerHTML = `<span class="aliado-nome">${localStorage.nomeAliado}</span>: bom, talvez `
+    function escolhaArmaAliado(event) {
+        mudarConteudo.anima('animacao-aparecer', escolhasPersonagem)
+        let opcaoEscolhida = event.target.textContent
+        escolhasPersonagem.forEach(e => e.textContent = '')
+        mudarConteudo.anima('animacao-aparecer', dialogos[0])
+        escolhasPersonagem[1].parentElement.classList.add('mostrar-arma')
+        escolhasPersonagem.forEach(element => element.removeEventListener('click', escolhaArmaAliado))
+        let tempoDeApresentacaoArmas
+        if(opcaoEscolhida.startsWith('Procuro') || opcaoEscolhida.startsWith('Com')) {
+            tempoDeApresentacaoArmas = 6000
+            dialogos[0].innerHTML = `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Bom, talvez esteja na hora de alguem criar coragem e enfrentar malvagor, então eu ${localStorage.nomeAliado}, serei o seu aliado`
+            setTimeout(() => {
+                dialogos[1].innerHTML = `Para iniciarmos a nossa jornada é necessário escolher uma arma, você pode escolher entre as opções abaixo`
+            },3000)
         } else {
-            dialogos[0].innerHTML = `<span class="aliado-nome">${localStorage.nomeAliado}</span>: `
+            tempoDeApresentacaoArmas = 3000
+            dialogos[0].innerHTML = `<span class="aliado-nome">${localStorage.nomeAliado}</span>: De fato, para enfrentar Malvagor, você terá que ter uma boa arma, abaixo você pode escolher entre tres tipos de arma`
         }
+
+        setTimeout(() => {
+            mudarConteudo.anima('animacao-esquerda', escolhasPersonagem)
+            escolhasPersonagem.forEach(e => e.addEventListener('click', escolherArma))
+            escolhasPersonagem[2].classList.remove('none')
+            escolhasPersonagem[0].innerHTML = '<img class="imagem-arma" src="../image/arma-1.png" alt="Machado"><br><span class="arma">Machado da Tempestade</span><span> feito com aço temperado. Pesado e intimidador</span>'
+            escolhasPersonagem[1].innerHTML = '<img class="imagem-arma" src="../image/arma-2.png" alt="Espada"><br><span class="arma">Espada da Aurora</span><span> forjada com maestria por hábeis artesãos. Brilha com a luz do amanhecer, refletindo esperança e beleza</span>'
+            escolhasPersonagem[2].innerHTML = '<img class="imagem-arma" src="../image/arma-3.png" alt="Cajado"><br><span class="arma">Cajado arcano</span> <span> adornado com entalhes místicos que capturam a essência do desconhecido</span>'
+        }, tempoDeApresentacaoArmas)
+
     }
 
+    function escolherArma(e) {
+        switch(e.target.firstElementChild.getAttribute('alt')){
+            case "Machado":
+                // logica caso escolha machado
+            break
+
+            case "Espada":
+                // logica caso escolha espada
+            break
+
+            case "Cajado":
+                // logica caso escolha cajado
+            break
+        }
+    }
 })

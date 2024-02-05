@@ -4,4 +4,12 @@ body {
 
 body.montanha {
     background: #8b4513 url(../image/fundo-montanha.webp)no-repeat top center;
-} 
+}
+
+.imagem-arma {
+    max-width: 100%;
+}
+
+ul.mostrar-arma {
+    list-style: none;
+}
