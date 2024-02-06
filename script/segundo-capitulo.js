@@ -1,5 +1,4 @@
 import * as geral from './script.js';
-import * as mudarConteudo from './mudar-conteudo.js'
 window.addEventListener('DOMContentLoaded', () => {
     let tituloTrocaDeCenario = geral.criarH1NoBody('');
     const escolhasPersonagem = document.querySelectorAll('.js-escolha');
@@ -12,6 +11,7 @@ window.addEventListener('DOMContentLoaded', () => {
     let tempoCarregamentoSecundario = 4000;
     let carregamentoInterativo;
     escolhasPersonagem.forEach(opcao => opcao.addEventListener('click', escolhasSegundoCapitulo))
+    localStorage.setItem('capituloAtual', 'Capitulo 2')
 
     function escolhasSegundoCapitulo() {
         escolhasPersonagem.forEach(opcao => {
@@ -64,8 +64,8 @@ window.addEventListener('DOMContentLoaded', () => {
         escolhasPersonagem[1].textContent = 'Sou um guerreiro que veio enfrentar Malfagor'
         btnAvancar.removeEventListener('click', irParaRegiao)
         geral.main.adicionarClasse('none')
-        geral.body.classList.add('carregar-conteudo')
-        geral.body.appendChild(tituloTrocaDeCenario)
+        document.body.classList.add('carregar-conteudo')
+        document.body.appendChild(tituloTrocaDeCenario)
         switch (regiaoEscolhida) {
             case "Floresta Élfica":
                 tituloTrocaDeCenario.textContent = 'Indo até a floresta Élfica'
@@ -79,7 +79,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     setTimeout(() => {
                         falaPersonagem.innerHTML = '<span class="aliado-nome">Desconhecido</span>: Alto lá forasteiro, quem és tu ?'
                         dialogos[0].classList.add('none')
-                        geral.body.classList.remove('carregar-conteudo')
+                        document.body.classList.remove('carregar-conteudo')
                         escolhasPersonagem.forEach(opcao => {
                             opcao.parentElement.classList.remove('none')
                             opcao.addEventListener('click', dialogoAposEscolherRegiao)
@@ -101,14 +101,14 @@ window.addEventListener('DOMContentLoaded', () => {
                     setTimeout(() => {
                         geral.main.removerClasse('none')
                         dialogos[0].classList.add('none')
-                        geral.body.classList.remove('carregar-conteudo')
+                        document.body.classList.remove('carregar-conteudo')
                         falaPersonagem.innerHTML = '<span class="aliado-nome">Desconhecido</span>: Revele-se, estranho, ou enfrente a minha ira'
                         escolhasPersonagem.forEach((opcao) => {
                             opcao.parentElement.classList.remove('none')
                             opcao.addEventListener('click', dialogoAposEscolherRegiao)
                         })
                         geral.imagemAliado.seletor.setAttribute('src', '../image/anao-montanha.webp')
-                        geral.body.classList.add('montanha')
+                        document.body.classList.add('montanha')
 
                     }, tempoCarregamentoSecundario)
                 }, tempoDeCarregamento)
@@ -163,7 +163,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             case "Sou um guerreiro que veio enfrentar Malfagor":
                 escolhasPersonagem[0].textContent = 'Com a aliança de um valente companheiro com certeza terei sucesso em minha missão'
-                escolhasPersonagem[1].textContent = 'Aprimorando meu arsenal, forjando novas armas e vestindo uma armadura imponente'
+                escolhasPersonagem[1].textContent = 'Uma boa arma. É isso que preciso e com ela com certeza vou conseguir derrota-lo'
                 break;
         }
         
@@ -183,8 +183,8 @@ window.addEventListener('DOMContentLoaded', () => {
             dialogos[0].innerHTML = `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Bom, talvez esteja na hora de alguem criar coragem e enfrentar malvagor, então eu ${localStorage.nomeAliado}, serei o seu aliado`
             geral.revelarDialogo(3000, dialogos[1], 'animacao-aparecer', `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Para iniciarmos a nossa jornada é necessário escolher uma arma, você pode escolher entre as opções abaixo`)
         } else {
-            tempoDeApresentacaoArmas = 3000
-            dialogos[0].innerHTML = `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Gostei da forma como você lida com as coisas. Muito bem, vou te ajudar a alcançar o seu triunfo. Serei o seu aliado nessa jornada`
+            tempoDeApresentacaoArmas = 6000
+            dialogos[0].innerHTML = `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Gostei do que disse. Muito bem, vou te ajudar a alcançar o seu triunfo. Serei o seu aliado nessa jornada`
             geral.revelarDialogo(3000, dialogos[1], 'animacao-aparecer', `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Além disso, vou te presentear com uma arma. Você pode escolher qual delas mais te agrada abaixo`)
         }
 
@@ -229,7 +229,13 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function finalizarCapitulo() {
-        // implementar logica ao terminar o capitulo
-        console.log('fim do capitulo')
+        geral.somMontanha.pause()
+        geral.somFloresta.pause()
+        geral.main.adicionarClasse('none')
+        document.body.className = 'carregar-conteudo'
+        clearInterval(somAmbiente)
+        geral.anima('animacao-aparecer',tituloTrocaDeCenario)
+        tituloTrocaDeCenario.textContent = 'Fim do capitulo 2'
+        geral.finalCapitulo(tituloTrocaDeCenario, 'Inicio do capitulo 3', 'terceiro-capitulo')
     }
 })

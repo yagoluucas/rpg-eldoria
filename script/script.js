@@ -1,4 +1,4 @@
-export function AlterarConteudo(seletor) {
+function AlterarConteudo(seletor) {
     this.seletor = document.querySelector(seletor)
 }
 
@@ -14,14 +14,13 @@ AlterarConteudo.prototype.alterarTexto = function(texto) {
     this.seletor.textContent = texto
 } 
 
-export const body = document.body
-export const somFloresta = document.querySelector('.js-som-floresta')
-export const somMontanha = document.querySelector('.js-som-montanha')
-export const imagemAliado = new AlterarConteudo('.js-personagem')
-export const imagemInimigo = new AlterarConteudo('.js-inimigo')
-export const main = new AlterarConteudo('main')
+const somFloresta = document.querySelector('.js-som-floresta')
+const somMontanha = document.querySelector('.js-som-montanha')
+const imagemAliado = new AlterarConteudo('.js-personagem')
+const imagemInimigo = new AlterarConteudo('.js-inimigo')
+const main = new AlterarConteudo('main')
 
-export function criarH1NoBody(textoTitulo) {
+function criarH1NoBody(textoTitulo) {
     let textoFecharCapitulo = document.createElement('h1')
     textoFecharCapitulo.textContent = textoTitulo
     textoFecharCapitulo.classList.add('final-capitulo')
@@ -29,7 +28,7 @@ export function criarH1NoBody(textoTitulo) {
 }
 
 let variavelIncremento = 0;
-export function funcaoCarregamentoInterativo(textoCarregamento) {
+function funcaoCarregamentoInterativo(textoCarregamento) {
     return setInterval(() => {
         if (variavelIncremento >= 3) {
             variavelIncremento = 0
@@ -41,26 +40,38 @@ export function funcaoCarregamentoInterativo(textoCarregamento) {
     }, 500)
 }
 
-export function anima(nomeAnimacao, elemento) {
-    if(elemento.length !== undefined) {
+function anima(nomeAnimacao, elemento) {
+    if(elemento.length != undefined) {
         elemento.forEach((e) => {
             e.classList.add(nomeAnimacao)
             setTimeout(() => {
                 e.classList.remove(nomeAnimacao)
             }, 1000)
         })
-    } else {
-        elemento.classList.add(nomeAnimacao)
+        return
+    }
+    elemento.classList.add(nomeAnimacao)
         setTimeout(() => {
             elemento.classList.remove(nomeAnimacao)
         }, 1000)
-    }
 }
 
-export function revelarDialogo(tempoRevelacao, paragrafo, animacao, texto) {
+function revelarDialogo(tempoRevelacao, paragrafo, animacao, texto) {
     setTimeout(() => {
         anima(animacao, paragrafo)
         paragrafo.innerHTML = texto
-    }, tempoRevelacao)
-
+    },tempoRevelacao)
 }
+
+// metodo abaixo está funcional
+function finalCapitulo(parafrago, textoParagrafo, capitulo) {
+    setTimeout(() => {
+        parafrago.textContent = textoParagrafo
+        anima('animacao-aparecer', parafrago)
+        setTimeout(() => {
+            window.location.pathname = `/html/${capitulo}.html`
+        }, 3000)
+    }, 3000)
+}
+
+export {AlterarConteudo, funcaoCarregamentoInterativo, anima, revelarDialogo, criarH1NoBody, somFloresta, somMontanha, imagemAliado, imagemInimigo, main, finalCapitulo}
