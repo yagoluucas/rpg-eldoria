@@ -70,7 +70,7 @@ function finalCapitulo(parafrago, textoParagrafo, capitulo) {
         parafrago.textContent = textoParagrafo
         anima('animacao-aparecer', parafrago)
         setTimeout(() => {
-            window.location.pathname = `/html/${capitulo}.html`
+            window.location.pathname = `${capitulo}.html`
         }, 3000)
     }, 3000)
 }

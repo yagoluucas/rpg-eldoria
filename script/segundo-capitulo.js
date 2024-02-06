@@ -81,7 +81,7 @@ window.addEventListener('DOMContentLoaded', () => {
                             opcao.addEventListener('click', dialogoAposEscolherRegiao)
                         })
                         geral.main.removerClasse('none')
-                        geral.imagemAliado.seletor.setAttribute('src', '../image/elfo-floresta.webp')
+                        geral.imagemAliado.seletor.setAttribute('src', './image/elfo-floresta.webp')
                     }, tempoCarregamentoSecundario)
                 }, tempoDeCarregamento)
                 break
@@ -103,7 +103,7 @@ window.addEventListener('DOMContentLoaded', () => {
                             opcao.parentElement.classList.remove('none')
                             opcao.addEventListener('click', dialogoAposEscolherRegiao)
                         })
-                        geral.imagemAliado.seletor.setAttribute('src', '../image/anao-montanha.webp')
+                        geral.imagemAliado.seletor.setAttribute('src', './image/anao-montanha.webp')
                         document.body.classList.add('montanha')
 
                     }, tempoCarregamentoSecundario)
@@ -185,9 +185,9 @@ window.addEventListener('DOMContentLoaded', () => {
             geral.anima('animacao-esquerda', geral.escolhasPersonagem)
             geral.escolhasPersonagem.forEach(e => e.addEventListener('click', escolherArma))
             geral.escolhasPersonagem[2].classList.remove('none')
-            geral.escolhasPersonagem[0].innerHTML = '<img class="imagem-arma" src="../image/arma-1.png" alt="Machado"><br><span class="arma">Machado da Tempestade</span><span> feito com aço temperado. Pesado e intimidador</span>'
-            geral.escolhasPersonagem[1].innerHTML = '<img class="imagem-arma" src="../image/arma-2.png" alt="Espada"><br><span class="arma">Espada da Aurora</span><span> forjada com maestria por hábeis artesãos. Brilha com a luz do amanhecer, refletindo esperança e beleza</span>'
-            geral.escolhasPersonagem[2].innerHTML = '<img class="imagem-arma" src="../image/arma-3.png" alt="Cajado"><br><span class="arma">Cajado arcano</span> <span> adornado com entalhes místicos que capturam a essência do desconhecido</span>'
+            geral.escolhasPersonagem[0].innerHTML = '<img class="imagem-arma" src="./image/arma-1.png" alt="Machado"><br><span class="arma">Machado da Tempestade</span><span> feito com aço temperado. Pesado e intimidador</span>'
+            geral.escolhasPersonagem[1].innerHTML = '<img class="imagem-arma" src="./image/arma-2.png" alt="Espada"><br><span class="arma">Espada da Aurora</span><span> forjada com maestria por hábeis artesãos. Brilha com a luz do amanhecer, refletindo esperança e beleza</span>'
+            geral.escolhasPersonagem[2].innerHTML = '<img class="imagem-arma" src="./image/arma-3.png" alt="Cajado"><br><span class="arma">Cajado arcano</span> <span> adornado com entalhes místicos que capturam a essência do desconhecido</span>'
         }, tempoDeApresentacaoArmas)
 
     }
