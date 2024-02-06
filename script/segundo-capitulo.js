@@ -32,7 +32,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function escolhaRegiao() {
-        mudarConteudo.anima('animacao-esquerda', falaPersonagem)
+        geral.anima('animacao-esquerda', falaPersonagem)
         let segundaFala = ''
         switch (regiaoEscolhida) {
             case "Floresta Élfica":
@@ -49,10 +49,10 @@ window.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             dialogos[0].classList.remove('none')
             dialogos[0].innerHTML = segundaFala
-            mudarConteudo.anima('animacao-esquerda',  dialogos[0])
+            geral.anima('animacao-esquerda',  dialogos[0])
             setTimeout(() => {
                 btnAvancar.classList.remove('none')
-                mudarConteudo.anima('animacao-aparecer', btnAvancar)
+                geral.anima('animacao-aparecer', btnAvancar)
                 btnAvancar.addEventListener('click', irParaRegiao)
             }, 8000)
         }, 3000)
@@ -149,8 +149,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 localStorage.nomeAliado = 'Dúrin'
             break    
         }
-        mudarConteudo.anima('animacao-esquerda', dialogos[0])
-        mudarConteudo.anima('animacao-esquerda', escolhasPersonagem)
+        geral.anima('animacao-esquerda', dialogos[0])
+        geral.anima('animacao-esquerda', escolhasPersonagem)
         escolhasPersonagem.forEach((element) => element.addEventListener('click', escolhaArmaAliado))
 
         //opção abaixo defini as opções de escolha do usuario de acordo com as opções que ele escolheu
@@ -170,26 +170,26 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function escolhaArmaAliado(event) {
-        mudarConteudo.anima('animacao-aparecer', escolhasPersonagem)
+        geral.anima('animacao-aparecer', escolhasPersonagem)
         let opcaoEscolhida = event.target.textContent
         escolhasPersonagem.forEach(e => e.textContent = '')
-        mudarConteudo.anima('animacao-aparecer', dialogos[0])
+        dialogos[1].classList.remove('none')
+        geral.anima('animacao-aparecer', dialogos[0])
         escolhasPersonagem[1].parentElement.classList.add('mostrar-arma')
         escolhasPersonagem.forEach(element => element.removeEventListener('click', escolhaArmaAliado))
         let tempoDeApresentacaoArmas
         if(opcaoEscolhida.startsWith('Procuro') || opcaoEscolhida.startsWith('Com')) {
             tempoDeApresentacaoArmas = 6000
             dialogos[0].innerHTML = `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Bom, talvez esteja na hora de alguem criar coragem e enfrentar malvagor, então eu ${localStorage.nomeAliado}, serei o seu aliado`
-            setTimeout(() => {
-                dialogos[1].innerHTML = `Para iniciarmos a nossa jornada é necessário escolher uma arma, você pode escolher entre as opções abaixo`
-            },3000)
+            geral.revelarDialogo(3000, dialogos[1], 'animacao-aparecer', `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Para iniciarmos a nossa jornada é necessário escolher uma arma, você pode escolher entre as opções abaixo`)
         } else {
             tempoDeApresentacaoArmas = 3000
-            dialogos[0].innerHTML = `<span class="aliado-nome">${localStorage.nomeAliado}</span>: De fato, para enfrentar Malvagor, você terá que ter uma boa arma, abaixo você pode escolher entre tres tipos de arma`
+            dialogos[0].innerHTML = `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Gostei da forma como você lida com as coisas. Muito bem, vou te ajudar a alcançar o seu triunfo. Serei o seu aliado nessa jornada`
+            geral.revelarDialogo(3000, dialogos[1], 'animacao-aparecer', `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Além disso, vou te presentear com uma arma. Você pode escolher qual delas mais te agrada abaixo`)
         }
 
         setTimeout(() => {
-            mudarConteudo.anima('animacao-esquerda', escolhasPersonagem)
+            geral.anima('animacao-esquerda', escolhasPersonagem)
             escolhasPersonagem.forEach(e => e.addEventListener('click', escolherArma))
             escolhasPersonagem[2].classList.remove('none')
             escolhasPersonagem[0].innerHTML = '<img class="imagem-arma" src="../image/arma-1.png" alt="Machado"><br><span class="arma">Machado da Tempestade</span><span> feito com aço temperado. Pesado e intimidador</span>'
@@ -200,18 +200,36 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function escolherArma(e) {
-        switch(e.target.firstElementChild.getAttribute('alt')){
+        dialogos[1].innerHTML = ''
+        escolhasPersonagem.forEach(e => e.classList.add('none'))
+        let fraseArma
+        let armaEscolhida
+        switch(e.currentTarget.firstElementChild.getAttribute('alt')){
             case "Machado":
-                // logica caso escolha machado
+                fraseArma = 'este <span class="arma">poderoso machado</span>'
+                armaEscolhida = 'Machado da Tempestade'
             break
 
             case "Espada":
-                // logica caso escolha espada
+                fraseArma = 'esta <span class="arma">espada afiada</span>'
+                armaEscolhida = 'Espada da Aurora'
             break
 
             case "Cajado":
-                // logica caso escolha cajado
+                fraseArma = 'este <span class="arma">cajado sagrado</span>'
+                armaEscolhida = 'Cajado arcano'
             break
         }
+        geral.revelarDialogo(0,dialogos[0], 'animacao-esquerda', `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Com ${fraseArma} você terá grandes chances de derrotar Malvagor`)
+        geral.revelarDialogo(3000, dialogos[1], 'animacao-esquerda', `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Isso é tudo que precisamos para iniciar a nossa jornada, está pronto para partir ?`)
+        localStorage.setItem('armaEscolhida', armaEscolhida)
+        setTimeout(() => {btnAvancar.classList.remove('none')}, 7000)
+        geral.revelarDialogo(7000, btnAvancar, 'animacao-aparecer', 'Terminar capitulo')
+        btnAvancar.addEventListener('click', finalizarCapitulo)
+    }
+
+    function finalizarCapitulo() {
+        // implementar logica ao terminar o capitulo
+        console.log('fim do capitulo')
     }
 })

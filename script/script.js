@@ -40,3 +40,27 @@ export function funcaoCarregamentoInterativo(textoCarregamento) {
         }
     }, 500)
 }
+
+export function anima(nomeAnimacao, elemento) {
+    if(elemento.length !== undefined) {
+        elemento.forEach((e) => {
+            e.classList.add(nomeAnimacao)
+            setTimeout(() => {
+                e.classList.remove(nomeAnimacao)
+            }, 1000)
+        })
+    } else {
+        elemento.classList.add(nomeAnimacao)
+        setTimeout(() => {
+            elemento.classList.remove(nomeAnimacao)
+        }, 1000)
+    }
+}
+
+export function revelarDialogo(tempoRevelacao, paragrafo, animacao, texto) {
+    setTimeout(() => {
+        anima(animacao, paragrafo)
+        paragrafo.innerHTML = texto
+    }, tempoRevelacao)
+
+}
