@@ -1,7 +1,6 @@
 import * as mudarConteudo from './mudar-conteudo.js';
 import * as geral from './script.js'
 window.addEventListener('DOMContentLoaded', () => {
-
     switch(localStorage.getItem('capituloAtual')) {
         case "Capitulo 2":
             window.location.pathname = '/html/segundo-capitulo.html'
@@ -10,7 +9,7 @@ window.addEventListener('DOMContentLoaded', () => {
             window.location.pathname = '/html/terceiro-capitulo.html'
         break
     }
-    const personagem = new geral.AlterarConteudo('.js-personagem')
+    const personagem = new geral.AlterarConteudo('.js-aliado')
     const dialogoEscolha = document.querySelector('h1.dialogo-escolha')
     const btnComecarJornada = document.querySelector('button.js-comecar-jornada-btn');
     const btnAvancar = new geral.AlterarConteudo('button.js-btn-avancar');
@@ -55,7 +54,7 @@ window.addEventListener('DOMContentLoaded', () => {
         personagem.removerClasse('none')
         paragrafoSegundaEscolha.textContent = ''
         btnAvancar.adicionarClasse('none')
-        document.body.style.background = '#006400 url(../image/fundo-floresta.webp)no-repeat top center'
+        document.body.style.background = '#006400 url(./image/fundo-floresta.webp)no-repeat top center'
         paragrafoPrimeiraEscolha.classList.add('animacao-aparecer')
         paragrafoPrimeiraEscolha.textContent = 'Agora, viajante corajoso, tua missão é clara. Explore as terras de Eldoria, converse com as criaturas mágicas, busque conhecimento nas antigas bibliotecas elficas, forje alianças com anões nas profundezas das montanhas e ganhe a confiança das fadas nos bosques encantados. Reúne artefatos perdidos, aprimora tuas habilidades mágicas e prepara-te para confrontar Malvagor.'
         setTimeout(() => {

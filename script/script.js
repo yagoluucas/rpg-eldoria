@@ -2,23 +2,26 @@ function AlterarConteudo(seletor) {
     this.seletor = document.querySelector(seletor)
 }
 
-AlterarConteudo.prototype.adicionarClasse = function(classeAdicionar) {
+AlterarConteudo.prototype.adicionarClasse = function (classeAdicionar) {
     this.seletor.classList.add(classeAdicionar)
 }
 
-AlterarConteudo.prototype.removerClasse = function(classeRemover) {
+AlterarConteudo.prototype.removerClasse = function (classeRemover) {
     this.seletor.classList.remove(classeRemover)
 }
 
-AlterarConteudo.prototype.alterarTexto = function(texto) {
+AlterarConteudo.prototype.alterarTexto = function (texto) {
     this.seletor.textContent = texto
-} 
+}
 
 const somFloresta = document.querySelector('.js-som-floresta')
 const somMontanha = document.querySelector('.js-som-montanha')
-const imagemAliado = new AlterarConteudo('.js-personagem')
+const imagemAliado = new AlterarConteudo('.js-aliado')
 const imagemInimigo = new AlterarConteudo('.js-inimigo')
 const main = new AlterarConteudo('main')
+const dialogo = document.querySelectorAll('.js-secao-dialogo .js-dialogo')
+const escolhasPersonagem = document.querySelectorAll('.js-escolha')
+const btnAvancar = document.querySelector('.js-btn-avancar')
 
 function criarH1NoBody(textoTitulo) {
     let textoFecharCapitulo = document.createElement('h1')
@@ -41,7 +44,7 @@ function funcaoCarregamentoInterativo(textoCarregamento) {
 }
 
 function anima(nomeAnimacao, elemento) {
-    if(elemento.length != undefined) {
+    if (elemento.length != undefined) {
         elemento.forEach((e) => {
             e.classList.add(nomeAnimacao)
             setTimeout(() => {
@@ -51,19 +54,17 @@ function anima(nomeAnimacao, elemento) {
         return
     }
     elemento.classList.add(nomeAnimacao)
-        setTimeout(() => {
-            elemento.classList.remove(nomeAnimacao)
-        }, 1000)
+    setTimeout(() => {
+        elemento.classList.remove(nomeAnimacao)
+    }, 1000)
 }
 
 function revelarDialogo(tempoRevelacao, paragrafo, animacao, texto) {
     setTimeout(() => {
         anima(animacao, paragrafo)
         paragrafo.innerHTML = texto
-    },tempoRevelacao)
+    }, tempoRevelacao)
 }
-
-// metodo abaixo está funcional
 function finalCapitulo(parafrago, textoParagrafo, capitulo) {
     setTimeout(() => {
         parafrago.textContent = textoParagrafo
@@ -74,4 +75,4 @@ function finalCapitulo(parafrago, textoParagrafo, capitulo) {
     }, 3000)
 }
 
-export {AlterarConteudo, funcaoCarregamentoInterativo, anima, revelarDialogo, criarH1NoBody, somFloresta, somMontanha, imagemAliado, imagemInimigo, main, finalCapitulo}
+export { AlterarConteudo, funcaoCarregamentoInterativo, anima, revelarDialogo, criarH1NoBody, somFloresta, somMontanha, imagemAliado, imagemInimigo, main, finalCapitulo, dialogo, escolhasPersonagem, btnAvancar }
