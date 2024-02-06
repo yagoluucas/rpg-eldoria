@@ -65,12 +65,16 @@ function revelarDialogo(tempoRevelacao, paragrafo, animacao, texto) {
         paragrafo.innerHTML = texto
     }, tempoRevelacao)
 }
-function finalCapitulo(parafrago, textoParagrafo, capitulo) {
+function finalCapitulo(parafrago, textoParagrafo, capitulo) { 
     setTimeout(() => {
+        let urlPagina = ''
+        if(window.location.href.includes('github')) {
+            urlPagina = '/rpg-eldoria/'
+        }
         parafrago.textContent = textoParagrafo
         anima('animacao-aparecer', parafrago)
         setTimeout(() => {
-            window.location.pathname = `${capitulo}.html`
+            window.location.pathname = `${urlPagina,capitulo}.html`
         }, 3000)
     }, 3000)
 }

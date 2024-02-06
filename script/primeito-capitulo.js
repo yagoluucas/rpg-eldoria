@@ -1,12 +1,16 @@
 import * as mudarConteudo from './mudar-conteudo.js';
 import * as geral from './script.js'
 window.addEventListener('DOMContentLoaded', () => {
+    let urlPagina = ''
+    if(window.location.href.includes('github')) {
+        urlPagina = '/rpg-eldoria/'
+    }
     switch(localStorage.getItem('capituloAtual')) {
         case "Capitulo 2":
-            window.location.pathname = '/html/segundo-capitulo.html'
+            window.location.pathname = `${urlPagina}segundo-capitulo.html`
         break
         case "Capitulo 3":
-            window.location.pathname = '/html/terceiro-capitulo.html'
+            window.location.pathname = `${urlPagina}terceiro-capitulo.html`
         break
     }
     const personagem = new geral.AlterarConteudo('.js-aliado')
