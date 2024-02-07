@@ -61,7 +61,7 @@ window.addEventListener('DOMContentLoaded', () => {
         geral.btnAvancar.removeEventListener('click', irParaRegiao)
         geral.main.adicionarClasse('none')
         document.body.classList.add('carregar-conteudo')
-        document.body.appendChild(tituloTrocaDeCenario)
+        document.body.append(tituloTrocaDeCenario)
         switch (regiaoEscolhida) {
             case "Floresta Élfica":
                 tituloTrocaDeCenario.textContent = 'Indo até a floresta Élfica'

@@ -31,14 +31,14 @@ function criarH1NoBody(textoTitulo) {
 }
 
 let variavelIncremento = 0;
-function funcaoCarregamentoInterativo(textoCarregamento) {
+function funcaoCarregamentoInterativo(elemento) {
     return setInterval(() => {
         if (variavelIncremento >= 3) {
             variavelIncremento = 0
-            textoCarregamento.textContent = textoCarregamento.textContent.slice(0, textoCarregamento.textContent.indexOf('.'))
+            elemento.textContent = elemento.textContent.slice(0, elemento.textContent.indexOf('.'))
         } else {
             variavelIncremento += 1
-            textoCarregamento.textContent += '.'
+            elemento.textContent += '.'
         }
     }, 500)
 }
