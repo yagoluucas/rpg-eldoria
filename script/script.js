@@ -66,11 +66,11 @@ function revelarDialogo(tempoRevelacao, paragrafo, animacao, texto) {
     }, tempoRevelacao)
 }
 function finalCapitulo(parafrago, textoParagrafo, capitulo) { 
-    setTimeout(() => {
-        let urlPagina = ''
-        if(window.location.href.includes('github')) {
+    let urlPagina = ''
+        if(window.location.hostname == 'yagoluucas.github.io') {
             urlPagina = '/rpg-eldoria/'
         }
+    setTimeout(() => {
         parafrago.textContent = textoParagrafo
         anima('animacao-aparecer', parafrago)
         setTimeout(() => {

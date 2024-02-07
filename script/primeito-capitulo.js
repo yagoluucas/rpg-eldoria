@@ -2,7 +2,7 @@ import * as mudarConteudo from './mudar-conteudo.js';
 import * as geral from './script.js'
 window.addEventListener('DOMContentLoaded', () => {
     let urlPagina = ''
-    if(window.location.href.includes('github')) {
+    if(window.location.hostname == 'yagoluucas.github.io') {
         urlPagina = '/rpg-eldoria/'
     }
     switch(localStorage.getItem('capituloAtual')) {
