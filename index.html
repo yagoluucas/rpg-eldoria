@@ -12,18 +12,16 @@
 
 <body>
     <main>
-        <img class="personagem none js-aliado" src="./image/mago.webp" alt="mago Althor">
-        <img class="none personagem js-malfagor" src="./image/rosto-malfagor.webp" alt="rosto de malfagor">
+        <img class="animate__animated personagem none js-aliado" src="./image/mago.webp" alt="mago Althor">
+        <img class="animate__animated none personagem js-inimigo" src="./image/rosto-malfagor.webp" alt="rosto de malfagor">
         <div>
-            <section class="secao-dialogo">
-                <h1 class="dialogo-escolha"></h1>
-                <p class="js-info-geral-personagem none"></p>
-                <p class="js-primeira-escolha none"></p>
-                <p class="js-segunda-escolha segunda-escolha none"></p>
-                <button class="js-comecar-jornada-btn none comecar-jornada-btn"></button>
-                <button class="js-btn-avancar"></button>
+            <section class="secao-dialogo js-secao-dialogo">
+                <h1 class="animate__animated dialogo-escolha js-dialogo">Bem-vindo(a) a Eldoria, onde tuas escolhas moldam o destino. Prepara-te para a jornada épica</h1>
+                <p class="animate__animated js-dialogo none"></p>
+                <p class="animate__animated js-dialogo segunda-escolha none"></p>
+                <button class="animate__animated js-comecar-jornada-btn none comecar-jornada-btn"></button>
+                <button class="animate__animated js-btn-avancar btn-avancar">Continua</button>
             </section>
-
             <audio class="js-som-terror" src="./audio/som-terror.mp3"></audio>
         </div>
     </main>

@@ -1,5 +1,6 @@
 import * as geral from './script.js';
 window.addEventListener('DOMContentLoaded', () => {
+    localStorage.setItem('capituloAtual', 'Capitulo 2')
     let tituloTrocaDeCenario = geral.criarH1NoBody('');
     const falaPersonagem = document.querySelector('.secao-dialogo h1');
     let regiaoEscolhida = '';
@@ -8,7 +9,7 @@ window.addEventListener('DOMContentLoaded', () => {
     let tempoCarregamentoSecundario = 4000;
     let carregamentoInterativo;
     geral.escolhasPersonagem.forEach(opcao => opcao.addEventListener('click', escolhasSegundoCapitulo))
-    localStorage.setItem('capituloAtual', 'Capitulo 2')
+
     function escolhasSegundoCapitulo() {
         geral.escolhasPersonagem.forEach(opcao => {
             opcao.parentElement.classList.add('none')

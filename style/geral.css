@@ -1,19 +1,15 @@
+@import url('../node_modules/animate.css/animate.css');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-button,
-input {
+button {
     padding: 10px;
-    margin-top: 30px;
+    margin-top: 10px;
     font-size: 1.2rem;
     border-radius: 10px;
-}
-
-p,h1,li {
-    max-width: 100%;
 }
 
 p, h1 {
@@ -51,14 +47,6 @@ html,body {
 body {
     font-size: 62.5%;
     height: 100vh;
-}
-
-body.carregar-conteudo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: none;
-    background-color: #000;
 }
 
 h1.final-capitulo {
@@ -110,55 +98,12 @@ p {
     font-size: 1.6rem;
 }
 
-.animacao-subindo {
-    animation: animacao-subindo 1s forwards ease;
-}
-
-@keyframes animacao-subindo {
-    0% {
-        transform: translateY(100%);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
-}
-
 .nome-vilao {
     color: #FF0000;
 }
 
 .none {
     display: none;
-}
-.animacao-esquerda {
-animation: animacao-esquerda 0.9s forwards;
-}
-
-@keyframes animacao-esquerda {
-    0% {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.animacao-aparecer {
-    animation: animacao-aparecer 1s forwards;
-}
-
-@keyframes animacao-aparecer {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
 }
 
 .bold {
@@ -204,4 +149,12 @@ li:hover {
 
 .arma {
     color: #ffbb00;
+}
+
+body.carregar-conteudo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: none !important;
+    background-color: 	#000000 !important;
 }

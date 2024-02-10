@@ -1,0 +1,22 @@
+{
+  "name": "jogo-rpg",
+  "version": "1.0.0",
+  "description": "projeto criado para fazer um jogo - livro ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yagoluucas/rpg-eldoria.git"
+  },
+  "author": "Yago Lucas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yagoluucas/rpg-eldoria/issues"
+  },
+  "homepage": "https://github.com/yagoluucas/rpg-eldoria#readme",
+  "dependencies": {
+    "animate.css": "^4.1.1"
+  }
+}

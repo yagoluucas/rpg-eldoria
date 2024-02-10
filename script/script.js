@@ -1,24 +1,8 @@
-function AlterarConteudo(seletor) {
-    this.seletor = document.querySelector(seletor)
-}
-
-AlterarConteudo.prototype.adicionarClasse = function (classeAdicionar) {
-    this.seletor.classList.add(classeAdicionar)
-}
-
-AlterarConteudo.prototype.removerClasse = function (classeRemover) {
-    this.seletor.classList.remove(classeRemover)
-}
-
-AlterarConteudo.prototype.alterarTexto = function (texto) {
-    this.seletor.textContent = texto
-}
-
 const somFloresta = document.querySelector('.js-som-floresta')
 const somMontanha = document.querySelector('.js-som-montanha')
-const imagemAliado = new AlterarConteudo('.js-aliado')
-const imagemInimigo = new AlterarConteudo('.js-inimigo')
-const main = new AlterarConteudo('main')
+const imagemAliado = document.querySelector('.js-aliado')
+const imagemInimigo = document.querySelector('.js-inimigo')
+const main = document.querySelector('main')
 const dialogo = document.querySelectorAll('.js-secao-dialogo .js-dialogo')
 const escolhasPersonagem = document.querySelectorAll('.js-escolha')
 const btnAvancar = document.querySelector('.js-btn-avancar')
@@ -46,6 +30,7 @@ function funcaoCarregamentoInterativo(elemento) {
 function anima(nomeAnimacao, elemento) {
     if (elemento.length != undefined) {
         elemento.forEach((e) => {
+            e.classList.remove('none')
             e.classList.add(nomeAnimacao)
             setTimeout(() => {
                 e.classList.remove(nomeAnimacao)
@@ -53,6 +38,7 @@ function anima(nomeAnimacao, elemento) {
         })
         return
     }
+    elemento.classList.remove('none')
     elemento.classList.add(nomeAnimacao)
     setTimeout(() => {
         elemento.classList.remove(nomeAnimacao)
@@ -65,18 +51,19 @@ function revelarDialogo(tempoRevelacao, paragrafo, animacao, texto) {
         paragrafo.innerHTML = texto
     }, tempoRevelacao)
 }
+
 function finalCapitulo(parafrago, textoParagrafo, capitulo) { 
     let urlPagina = ''
         if(window.location.hostname == 'yagoluucas.github.io') {
             urlPagina = '/rpg-eldoria/'
         }
     setTimeout(() => {
+        parafrago.classList.add('animate__animated', 'animate__slideInDown')
         parafrago.textContent = textoParagrafo
-        anima('animacao-aparecer', parafrago)
         setTimeout(() => {
             window.location.pathname = `${urlPagina}${capitulo}.html`
         }, 3000)
     }, 3000)
 }
 
-export { AlterarConteudo, funcaoCarregamentoInterativo, anima, revelarDialogo, criarH1NoBody, somFloresta, somMontanha, imagemAliado, imagemInimigo, main, finalCapitulo, dialogo, escolhasPersonagem, btnAvancar }
+export { funcaoCarregamentoInterativo, anima, revelarDialogo, criarH1NoBody, finalCapitulo, somFloresta, somMontanha, imagemAliado, imagemInimigo, main, dialogo, escolhasPersonagem, btnAvancar }
