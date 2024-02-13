@@ -32,7 +32,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function comecarJornada() {
         geral.btnAvancar.removeEventListener('click', comecarJornada)
-        geral.anima('animate__fadeInDown', geral.dialogo[0])
+        geral.anima('animate__fadeInLeft', geral.dialogo[0])
         geral.btnAvancar.classList.add('none')
         geral.btnAvancar.removeEventListener('click', dialogoInicial)
         geral.dialogo[0].style.margimBottom = '5px'
@@ -62,7 +62,7 @@ window.addEventListener('DOMContentLoaded', () => {
         geral.anima('animate__fadeIn', geral.imagemInimigo)
         document.body.classList.add('carregar-conteudo')
         geral.dialogo[0].classList.add('none')
-        geral.anima('animate__fadeInDown', geral.dialogo[1])
+        geral.anima('animate__fadeInLeft', geral.dialogo[1])
         geral.dialogo[1].textContent = 'Malvagor, sombrio por natureza, emerge das profundezas do desconhecido. Uma vez um ser de luz corrompido por ambições desmedidas, sua busca por poder desencadeou uma onda de trevas sobre Eldoria. Utilizando artes proibidas, despertou criaturas antigas e enegreceu corações leais'
         geral.dialogo[2].textContent = ''
         geral.revelarDialogo(4000, geral.dialogo[2], 'animate__fadeInLeft', 'Assolou nossas terras, desafiando a harmonia que reinava entre elfos, anões e fadas. Com suas artimanhas, desencadeou conflitos e semeou discórdia, tornando-se a personificação da sombra que paira sobre Eldoria')
@@ -88,7 +88,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function terminarCapitulo() {
-        geral.main.classList.add('none')
         document.body.classList.add('carregar-conteudo')
         let textoFecharCapitulo = geral.criarH1NoBody('Final do capitulo 1')
         document.body.appendChild(textoFecharCapitulo)

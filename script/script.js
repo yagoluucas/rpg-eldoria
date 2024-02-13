@@ -52,7 +52,8 @@ function revelarDialogo(tempoRevelacao, paragrafo, animacao, texto) {
     }, tempoRevelacao)
 }
 
-function finalCapitulo(parafrago, textoParagrafo, capitulo) { 
+function finalCapitulo(parafrago, textoParagrafo, capitulo) {
+    main.classList.add('none')
     let urlPagina = ''
         if(window.location.hostname == 'yagoluucas.github.io') {
             urlPagina = '/rpg-eldoria/'
