@@ -78,7 +78,7 @@ main div {
     width: 100%;
     z-index: 1000;
     position: fixed;
-    max-height: 180px;
+    max-height: 170px;
     overflow-y: scroll;
     bottom: 0;
     border-top: 2px solid #0c3a96;
@@ -118,10 +118,10 @@ ul {
 }
 
 li {
-    width: max-content;
     font-size: 1.4rem;
     cursor: pointer;
     margin: 15px 5px;
+    width: 100%;
 }
 
 li:last-child {

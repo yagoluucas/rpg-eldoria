@@ -45,10 +45,10 @@ function anima(nomeAnimacao, elemento) {
     }, 1000)
 }
 
-function revelarDialogo(tempoRevelacao, paragrafo, animacao, texto) {
+function revelarDialogo(tempoRevelacao, elemento, texto) {
     setTimeout(() => {
-        anima(animacao, paragrafo)
-        paragrafo.innerHTML = texto
+        anima('animate__fadeInLeft', elemento)
+        elemento.innerHTML = texto
     }, tempoRevelacao)
 }
 
@@ -67,4 +67,8 @@ function finalCapitulo(parafrago, textoParagrafo, capitulo) {
     }, 3000)
 }
 
-export { funcaoCarregamentoInterativo, anima, revelarDialogo, criarH1NoBody, finalCapitulo, somFloresta, somMontanha, imagemAliado, imagemInimigo, main, dialogo, escolhasPersonagem, btnAvancar }
+function getItemLocalStorage(item) {
+    return localStorage.getItem(item)
+}
+
+export { funcaoCarregamentoInterativo, anima, revelarDialogo, criarH1NoBody, finalCapitulo,getItemLocalStorage, somFloresta, somMontanha, imagemAliado, imagemInimigo, main, dialogo, escolhasPersonagem, btnAvancar }
