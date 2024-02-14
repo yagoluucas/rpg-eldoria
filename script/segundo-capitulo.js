@@ -2,7 +2,6 @@ import * as geral from './script.js';
 window.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('capituloAtual', 'Capitulo 2')
     let tituloTrocaDeCenario = geral.criarH1NoBody('');
-    let regiaoEscolhida = '';
     let somAmbiente;
     let tempoDeCarregamento = 6000;
     let tempoCarregamentoSecundario = 4000;
@@ -24,11 +23,11 @@ window.addEventListener('DOMContentLoaded', () => {
         geral.escolhasPersonagem.forEach(opcao => opcao.removeEventListener('click', escolhasSegundoCapitulo))
         switch (this.textContent) {
             case "Floresta Élfica":
-                regiaoEscolhida = 'Floresta Élfica'
+                localStorage.nomeAliado = 'Aldrin'
                 break
 
             case "Montanhas Anor":
-                regiaoEscolhida = 'Montanhas Anor'
+                localStorage.nomeAliado = 'Dúrin'
                 break
         }
 
@@ -36,18 +35,12 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function escolhaRegiao() {
-        geral.anima('animate__fadeInLeft', geral.dialogo[0])
-        switch (regiaoEscolhida) {
-            case "Floresta Élfica":
-                geral.dialogo[0].innerHTML = '<span class="aliado-nome">Althor</span>: Escolheste o caminho das árvores ancestrais e da magia élfica'
-                geral.revelarDialogo(3000, geral.dialogo[1], 'animate__fadeInLeft', '<span class="aliado-nome">Althor</span>: Teus passos agora seguem a dança das folhas e o sussurro das árvores. Na Floresta Élfica, aliados sábios e segredos aguardam tua jornada. Que a luz dos elfos guie teus passos, nobre aventureiro')
-                break
-
-            case "Montanhas Anor":
-                geral.dialogo[0].innerHTML = '<span class="aliado-nome">Althor</span>:  Ao escolher o caminho das Montanhas Anor, adentras um reino rochoso, onde anões mestres da forja e segredos antigas aguardam tua jornada corajosa'
-                geral.revelarDialogo(3000, geral.dialogo[1], 'animate__fadeInLeft', '<span class="aliado-nome">Althor</span>: Que a força das montanhas guie tua jornada, nobre aventureiro, pois grandes desafios e descobertas te aguardam entre suas majestosas rochas')
-                break
-        }
+        geral.revelarDialogo(0, geral.dialogo[0], geral.getItemLocalStorage('nomeAliado') == "Aldrin" ? '<span class="aliado-nome">Althor</span>: Escolheste o caminho das árvores ancestrais e da magia élfica'
+            :
+            '<span class="aliado-nome">Althor</span>:  Ao escolher o caminho das Montanhas Anor, adentras um reino rochoso, onde anões mestres da forja e segredos antigas aguardam tua jornada corajosa')
+        geral.revelarDialogo(3000, geral.dialogo[1], geral.getItemLocalStorage('nomeAliado') == "Aldrin" ? '<span class="aliado-nome">Althor</span>: Teus passos agora seguem a dança das folhas e o sussurro das árvores. Na Floresta Élfica, aliados sábios e segredos aguardam tua jornada. Que a luz dos elfos guie teus passos, nobre aventureiro'
+            :
+            '<span class="aliado-nome">Althor</span>: Que a força das montanhas guie tua jornada, nobre aventureiro, pois grandes desafios e descobertas te aguardam entre suas majestosas rochas')
         setTimeout(() => {
             geral.anima('animate__fadeIn', geral.btnAvancar)
             geral.btnAvancar.addEventListener('click', irParaRegiao)
@@ -61,11 +54,11 @@ window.addEventListener('DOMContentLoaded', () => {
         geral.btnAvancar.removeEventListener('click', irParaRegiao)
         geral.main.classList.add('none')
         document.body.classList.add('carregar-conteudo')
+        tituloTrocaDeCenario.textContent = geral.getItemLocalStorage('nomeAliado') == 'Aldrin' ? 'Indo até a floresta Élfica' : 'Indo até a Montanha Anor'
         document.body.append(tituloTrocaDeCenario)
-        switch (regiaoEscolhida) {
-            case "Floresta Élfica":
-                tituloTrocaDeCenario.textContent = 'Indo até a floresta Élfica'
-                carregamentoInterativo = geral.funcaoCarregamentoInterativo(tituloTrocaDeCenario)
+        carregamentoInterativo = geral.funcaoCarregamentoInterativo(tituloTrocaDeCenario)
+        switch (geral.getItemLocalStorage('nomeAliado')) {
+            case "Aldrin":              
                 setTimeout(() => {
                     clearInterval(carregamentoInterativo)
                     somAmbiente = setInterval(() => {
@@ -79,9 +72,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 }, tempoDeCarregamento)
                 break
 
-            case "Montanhas Anor":
-                tituloTrocaDeCenario.textContent = 'Indo até a Montanha Anor'
-                carregamentoInterativo = geral.funcaoCarregamentoInterativo(tituloTrocaDeCenario)
+            case "Dúrin":
                 setTimeout(() => {
                     somAmbiente = setInterval(() => geral.somMontanha.play())
                     clearInterval(carregamentoInterativo)
@@ -99,80 +90,46 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function dialogoAposEscolherRegiao(e) {
         geral.escolhasPersonagem.forEach(e => e.removeEventListener('click', dialogoAposEscolherRegiao))
-        let respostaEscolhida = e.target.textContent
-        geral.dialogo[1].classList.remove('none')
+        let respostaEscolhida = e.target.textContent == "Sou um aventureiro"
+        geral.anima('animate__fadeInLeft', geral.dialogo[1])
+        geral.anima('animate__fadeInLeft', geral.escolhasPersonagem[0].parentElement)
         geral.dialogo[0].classList.add('none')
-        //opcão abaixo defini o que o aliado vai falar de acordo com região e escolha do usuario 
-        switch (regiaoEscolhida) {
-            case "Floresta Élfica":
-                switch (respostaEscolhida) {
-                    case "Sou um aventureiro":
-                        geral.dialogo[1].innerHTML = 'Ora, Ora, há muito tempos não vejo aventureiros por aqui, pois bem meu nome é <span class="aliado-nome">Aldrin</span> <br>E o que procura na grande floresta elfica ?'
-                        break;
-                    case "Sou um guerreiro que veio enfrentar Malfagor":
-                        geral.dialogo[1].innerHTML = 'HAHAHAH pelo visto é um pequeno comediante, por sinal meu nome é <span class="aliado-nome">Aldrin</span> <br> E como voce acha que vai derrotar Malfagor ?'
-                        break;
-                }
-                localStorage.nomeAliado = 'Aldrin'
-                break;
-
-            case "Montanhas Anor":
-                switch (respostaEscolhida) {
-                    case "Sou um aventureiro":
-                        geral.dialogo[1].innerHTML = 'Aventureiro, palavras para mim são como o vento. Demonstre tua coragem. Aqui, sou <span class="aliado-nome">Dúrin</span>, Ferreiro da Montanha. E tu, forasteiro, o que procuras nas Montanhas ?'
-                        break;
-                    case "Sou um guerreiro que veio enfrentar Malfagor":
-                        geral.dialogo[1].innerHTML = 'Guerreiro destemido, o humor é a sua piada? Eu sou <span class="aliado-nome">Dúrin</span>, Ferreiro da Montanha. Enfrentar Malfagor é motivo para risos. Fale, estranho, como pretendes fazê-lo?'
-                        break;
-                }
-
-                localStorage.nomeAliado = 'Dúrin'
-                break
+        //opcão abaixo defini o que o aliado vai falar de acordo com região e escolha do usuario
+        switch (geral.getItemLocalStorage('nomeAliado')) {
+            case "Aldrin":
+                geral.dialogo[1].innerHTML = respostaEscolhida ? 'Ora, Ora, há muito tempos não vejo aventureiros por aqui, pois bem meu nome é <span class="aliado-nome">Aldrin</span> <br>E o que procura na grande floresta elfica ?' : 'HAHAHAH pelo visto é um pequeno comediante, por sinal meu nome é <span class="aliado-nome">Aldrin</span> <br> E como voce acha que vai derrotar Malfagor ?'
+            case "Dúrin":
+                geral.dialogo[1].innerHTML = respostaEscolhida ? 'Aventureiro, palavras para mim são como o vento. Demonstre tua coragem. Aqui, sou <span class="aliado-nome">Dúrin</span>, Ferreiro da Montanha. E tu, forasteiro, o que procuras nas Montanhas ?' : 'Guerreiro destemido, o humor é a sua piada? Eu sou <span class="aliado-nome">Dúrin</span>, Ferreiro da Montanha. Enfrentar Malfagor é motivo para risos. Fale, estranho, como pretendes fazê-lo?'
         }
-        geral.anima('animacao-esquerda', geral.dialogo[1])
-        geral.anima('animacao-esquerda', geral.escolhasPersonagem[0].parentElement)
+        geral.escolhasPersonagem[0].textContent = respostaEscolhida ? 'Procuro aliados para poder derrotar Malvagor' : 'Com a aliança de um valente companheiro com certeza terei sucesso em minha missão'
+        geral.escolhasPersonagem[1].textContent = respostaEscolhida ? 'Preciso ficar mais forte para assim conseguir derrotar malvagor' : 'Uma boa arma. É isso que preciso e com ela com certeza vou conseguir derrota-lo'
         geral.escolhasPersonagem.forEach((element) => element.addEventListener('click', escolhaArmaAliado))
-        switch (respostaEscolhida) {
-            case "Sou um aventureiro":
-                geral.escolhasPersonagem[0].textContent = 'Procuro aliados para poder derrotar Malvagor'
-                geral.escolhasPersonagem[1].textContent = 'Preciso ficar mais forte para assim conseguir derrotar malvagor'
-                break;
-
-            case "Sou um guerreiro que veio enfrentar Malfagor":
-                geral.escolhasPersonagem[0].textContent = 'Com a aliança de um valente companheiro com certeza terei sucesso em minha missão'
-                geral.escolhasPersonagem[1].textContent = 'Uma boa arma. É isso que preciso e com ela com certeza vou conseguir derrota-lo'
-                break;
-        }
 
     }
 
     function escolhaArmaAliado(event) {
-        geral.anima('animacao-aparecer', geral.escolhasPersonagem)
+        geral.anima('animate__fadeInLeft', geral.escolhasPersonagem)
         let opcaoEscolhida = event.target.textContent
         geral.escolhasPersonagem.forEach(e => e.textContent = '')
-        geral.dialogo[2].classList.remove('none')
-        geral.anima('animacao-aparecer', geral.dialogo[1])
+        geral.anima('animate__fadeInLeft', geral.dialogo[1])
         geral.escolhasPersonagem[1].parentElement.classList.add('mostrar-arma')
         geral.escolhasPersonagem.forEach(element => element.removeEventListener('click', escolhaArmaAliado))
-        let tempoDeApresentacaoArmas
         if (opcaoEscolhida.startsWith('Procuro') || opcaoEscolhida.startsWith('Com')) {
-            tempoDeApresentacaoArmas = 6000
             geral.dialogo[1].innerHTML = `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Bom, talvez esteja na hora de alguem criar coragem e enfrentar malvagor, então eu ${localStorage.nomeAliado}, serei o seu aliado`
-            geral.revelarDialogo(3000, geral.dialogo[2], 'animacao-aparecer', `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Para iniciarmos a nossa jornada é necessário escolher uma arma, você pode escolher entre as opções abaixo`)
+            geral.revelarDialogo(3000, geral.dialogo[2], `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Para iniciarmos a nossa jornada é necessário escolher uma arma, você pode escolher entre as opções abaixo`)
         } else {
-            tempoDeApresentacaoArmas = 6000
             geral.dialogo[1].innerHTML = `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Gostei do que disse. Muito bem, vou te ajudar a alcançar o seu triunfo. Serei o seu aliado nessa jornada`
-            geral.revelarDialogo(3000, geral.dialogo[2], 'animacao-aparecer', `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Além disso, vou te presentear com uma arma. Você pode escolher qual delas mais te agrada abaixo`)
+            geral.revelarDialogo(3000, geral.dialogo[2], `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Além disso, vou te presentear com uma arma. Você pode escolher qual delas mais te agrada abaixo`)
         }
 
         setTimeout(() => {
-            geral.anima('animacao-esquerda', geral.escolhasPersonagem)
+            geral.anima('animate__fadeInLeft', geral.escolhasPersonagem)
             geral.escolhasPersonagem.forEach(e => e.addEventListener('click', escolherArma))
-            geral.escolhasPersonagem[2].classList.remove('none')
+            geral.escolhasPersonagem[2].classList.remove('none') // removi para aparecer a terceira arma
             geral.escolhasPersonagem[0].innerHTML = '<img class="imagem-arma" src="./image/arma-1.png" alt="Machado"><br><span class="arma">Machado da Tempestade</span><span> feito com aço temperado. Pesado e intimidador</span>'
             geral.escolhasPersonagem[1].innerHTML = '<img class="imagem-arma" src="./image/arma-2.png" alt="Espada"><br><span class="arma">Espada da Aurora</span><span> forjada com maestria por hábeis artesãos. Brilha com a luz do amanhecer, refletindo esperança e beleza</span>'
             geral.escolhasPersonagem[2].innerHTML = '<img class="imagem-arma" src="./image/arma-3.png" alt="Cajado"><br><span class="arma">Cajado arcano</span> <span> adornado com entalhes místicos que capturam a essência do desconhecido</span>'
-        }, tempoDeApresentacaoArmas)
+        }, 7000)
 
     }
 
@@ -197,11 +154,11 @@ window.addEventListener('DOMContentLoaded', () => {
                 armaEscolhida = 'Cajado arcano'
                 break
         }
-        geral.revelarDialogo(0, geral.dialogo[1], 'animacao-esquerda', `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Com ${fraseArma} você terá grandes chances de derrotar Malvagor`)
-        geral.revelarDialogo(3000, geral.dialogo[2], 'animacao-esquerda', `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Isso é tudo que precisamos para iniciar a nossa jornada, está pronto para partir ?`)
+        geral.revelarDialogo(0, geral.dialogo[1], `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Com ${fraseArma} você terá grandes chances de derrotar Malvagor`)
+        geral.revelarDialogo(3000, geral.dialogo[2], `<span class="aliado-nome">${localStorage.nomeAliado}</span>: Isso é tudo que precisamos para iniciar a nossa jornada, está pronto para partir ?`)
         localStorage.setItem('armaEscolhida', armaEscolhida)
         setTimeout(() => { geral.btnAvancar.classList.remove('none') }, 7000)
-        geral.revelarDialogo(7000, geral.btnAvancar, 'animacao-aparecer', 'Terminar capitulo')
+        geral.revelarDialogo(7000, geral.btnAvancar, 'Terminar capitulo')
         geral.btnAvancar.addEventListener('click', finalizarCapitulo)
     }
 
