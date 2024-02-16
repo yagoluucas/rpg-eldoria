@@ -15,8 +15,5 @@
   "bugs": {
     "url": "https://github.com/yagoluucas/rpg-eldoria/issues"
   },
-  "homepage": "https://github.com/yagoluucas/rpg-eldoria#readme",
-  "dependencies": {
-    "animate.css": "^4.1.1"
-  }
+  "homepage": "https://github.com/yagoluucas/rpg-eldoria#readme"
 }
